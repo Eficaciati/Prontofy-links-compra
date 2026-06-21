@@ -25,8 +25,8 @@ import {
 import ProntofyLogo from "@/components/ProntofyLogo";
 import agendaIa from "@/assets/agenda-ia.png";
 import antesImage from "@/assets/antes.png";
-import cardClinic from "@/assets/card-clinic.jpg";
-import cardDashboard from "@/assets/card-dashboard.jpg";
+import medicaRotinaImage from "@/assets/medica-rotina.png";
+import implementacaoImage from "@/assets/implementação.png";
 import depoisImage from "@/assets/depois.png";
 import madrugadaTristeImage from "@/assets/madrugada-triste.png";
 import solucaoDeGestao from "@/assets/solucao-de-gestao.png";
@@ -125,6 +125,127 @@ const steps = [
     icon: LineChart,
     title: "Acompanhamento estratégico",
     text: "Indicadores claros para decidir com mais rapidez e segurança.",
+  },
+];
+const platformModules = [
+  { icon: Users, title: "Gestao de pacientes", text: "Pacientes, atendimentos e historico centralizados." },
+  { icon: Stethoscope, title: "Atendimento e consultas", text: "Consultas, procedimentos, evolucao e documentos." },
+  { icon: CalendarCheck, title: "Gestao de agenda", text: "Consultas, horarios, sala de espera e lembretes." },
+  { icon: Wallet, title: "Financeiro", text: "Contas, faturamento, previsao e controle do caixa." },
+  { icon: MessageCircle, title: "CRM e relacionamento", text: "Comunicacao com pacientes e automacoes de contato." },
+  { icon: Activity, title: "Ambulancias", text: "Gestao de ambulancias e operacao assistencial." },
+  { icon: LineChart, title: "Relatorios", text: "Analytics, KPIs e indicadores para decisao." },
+  { icon: ShieldCheck, title: "Administracao", text: "Configuracoes internas, usuarios, seguranca e permissoes." },
+  { icon: Sparkles, title: "Recursos extras", text: "Integracoes, ferramentas e funcionalidades avancadas." },
+];
+
+const includedFeatures = [
+  "Transcricao inteligente com IA",
+  "Easy GPT com AutoPrompt",
+  "Identificacao de deficiencias nutricionais",
+  "Analisador de dosagens",
+  "Assistente de diagnostico",
+  "Resumo do historico do paciente",
+  "Agente de recomendacao de prescricao",
+  "Agente de recomendacao de pedido de exames",
+  "Agente de recomendacao de planos alimentares",
+  "Assinatura com certificado digital",
+  "Exames laboratoriais com extracao automatica e graficos evolutivos",
+  "Extracao automatica de bioimpedancia",
+  "Relatorios e lista de tarefas",
+  "Agenda PRO com salas, historico e sala de espera",
+  "Link para agendamentos",
+  "Envio rapido de documentos via WhatsApp",
+  "Easy Patient, aplicativo do paciente",
+  "Modulo financeiro",
+  "Laminas educativas",
+  "Plano alimentar com modelos exclusivos",
+];
+
+const pricingPlans = [
+  {
+    name: "Single",
+    price: "R$ 200,00",
+    period: "/mes",
+    audience: "Medicos individuais",
+    button: "Escolher plano",
+    featured: false,
+    features: ["1 clinica", "Ate 2 usuarios", "Ate 8.000 pacientes", "Oswald AI com 10 creditos", "Suporte completo incluso na assinatura"],
+  },
+  {
+    name: "Pro Max",
+    price: "R$ 597,00",
+    period: "/mes",
+    audience: "Clinicas em crescimento",
+    button: "Escolher plano",
+    featured: true,
+    features: [
+      "Ate 2 clinicas",
+      "Ate 3 usuarios",
+      "Ate 15.000 pacientes",
+      "Oswald AI com 50 creditos",
+      "Secretaria IA inclusa com configuracao gratis",
+      "Suporte completo incluso na assinatura",
+      "Importacao de dados antigos inclusa",
+    ],
+  },
+  {
+    name: "Enterprise",
+    price: "Sob consulta",
+    period: "",
+    audience: "Operacoes maiores e clinicas estruturadas",
+    button: "Falar com vendas",
+    featured: false,
+    features: [
+      "Mais clinicas sob demanda",
+      "Mais usuarios sob demanda",
+      "Mais pacientes por clinica",
+      "Mais creditos do Oswald AI",
+      "Suporte completo prioritario",
+      "Importacao de dados antigos inclusa",
+    ],
+  },
+];
+
+const pricingComparisonGroups = [
+  {
+    title: "Capacidade do plano",
+    rows: [
+      { label: "Clinicas", values: ["1 clinica", "Ate 2 clinicas", "Sob demanda"] },
+      { label: "Usuarios", values: ["Ate 2", "Ate 3", "Sob demanda"] },
+      { label: "Pacientes", values: ["Ate 8.000", "Ate 15.000", "Por clinica"] },
+      { label: "Oswald AI", values: ["10 creditos", "50 creditos", "Mais creditos"] },
+      { label: "Secretaria IA", values: [false, "Inclusa", "Personalizada"] },
+      { label: "Suporte completo", values: [true, true, "Prioritario"] },
+      { label: "Importacao de dados antigos", values: [false, true, true] },
+    ],
+  },
+  {
+    title: "Modulos da plataforma",
+    rows: platformModules.map((module) => ({ label: module.title, description: module.text, values: [true, true, true] })),
+  },
+
+];
+const faqs = [
+  {
+    question: "A Prontofy serve para medico individual e para clinicas?",
+    answer: "Sim. O plano Single atende medicos individuais, enquanto Pro Max e Enterprise foram pensados para clinicas, equipes e operacoes com mais volume.",
+  },
+  {
+    question: "A Secretaria IA esta inclusa?",
+    answer: "No Pro Max ela ja aparece inclusa com configuracao gratis. Para operacoes maiores, a configuracao pode ser ajustada conforme o fluxo da clinica.",
+  },
+  {
+    question: "Consigo importar dados antigos?",
+    answer: "Sim. A importacao de dados antigos esta prevista nos planos Pro Max e Enterprise para facilitar a transicao sem perder historico.",
+  },
+  {
+    question: "O que o Oswald AI faz na rotina?",
+    answer: "Ele apoia transcricao, resumo de historico, diagnostico, prescricoes, pedidos de exames, planos alimentares e analises clinicas com IA.",
+  },
+  {
+    question: "Preciso contratar suporte separado?",
+    answer: "Nao. O suporte completo esta incluso na assinatura, com atendimento prioritario para operacoes Enterprise.",
   },
 ];
 
@@ -314,6 +435,8 @@ const FormularioLeads = () => {
       <HowItWorksSection />
       <BeforeAfterSection />
       <FinalCTASection />
+      <PricingSection />
+      <FAQSection />
     </main>
   );
 };
@@ -628,49 +751,77 @@ const BenefitsSection = () => (
   <section className="relative overflow-hidden bg-[#050709] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
     <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(30,136,229,0.14),transparent_32%),radial-gradient(circle_at_78%_78%,rgba(28,200,138,0.12),transparent_30%)]" />
     <div className="relative mx-auto max-w-7xl">
-      <div className="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-end lg:gap-14">
+      <div className="grid gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:gap-16">
+        <div className="order-2 lg:order-1">
+          <div className="relative mx-auto max-w-[680px] pb-2 pt-2 lg:max-w-none lg:py-12">
+            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.055] p-3 shadow-[0_30px_90px_rgba(0,0,0,0.38)] backdrop-blur">
+              <img src={medicaRotinaImage} alt="Medica organizando a rotina clinica com tecnologia" className="aspect-[4/3] w-full rounded-xl object-cover sm:aspect-[16/11] lg:aspect-[4/3]" />
+            </div>
+
+            <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:hidden">
+              {benefits.map((benefit) => {
+                const Icon = benefit.icon;
+                return (
+                  <article key={benefit.title} className="rounded-xl border border-white/10 bg-[#0b1622]/86 p-4 shadow-[0_18px_54px_rgba(0,0,0,0.24)] backdrop-blur">
+                    <span className="grid h-9 w-9 place-items-center rounded-md bg-emerald-300/12 text-emerald-300">
+                      <Icon className="h-4 w-4" />
+                    </span>
+                    <h3 className="mt-3 text-sm font-extrabold leading-tight text-white">{benefit.title}</h3>
+                    <p className="mt-1.5 text-xs font-medium leading-5 text-white/58">{benefit.text}</p>
+                  </article>
+                );
+              })}
+            </div>
+
+            <div className="pointer-events-none absolute inset-0 hidden lg:block">
+              {benefits.map((benefit, index) => {
+                const Icon = benefit.icon;
+                const positions = [
+                  "-left-5 top-3 xl:-left-10",
+                  "right-4 top-0 xl:-right-4",
+                  "-left-8 top-1/2 -translate-y-1/2 xl:-left-14",
+                  "-right-7 top-[43%] xl:-right-12",
+                  "left-8 bottom-0 xl:left-3",
+                  "right-8 bottom-3 xl:right-2",
+                ];
+                return (
+                  <article
+                    key={benefit.title}
+                    className={`absolute w-[230px] rounded-xl border border-white/12 bg-[#071725]/88 p-4 shadow-[0_22px_70px_rgba(0,0,0,0.36)] backdrop-blur-xl ${positions[index]}`}
+                  >
+                    <span className="grid h-9 w-9 place-items-center rounded-md bg-emerald-300/12 text-emerald-300">
+                      <Icon className="h-4 w-4" />
+                    </span>
+                    <h3 className="mt-3 text-sm font-extrabold leading-tight text-white">{benefit.title}</h3>
+                    <p className="mt-1.5 text-xs font-medium leading-5 text-white/58">{benefit.text}</p>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
         <div className="order-1 lg:order-2">
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300">Benefícios reais</p>
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300">Beneficios reais</p>
           <h2 className="mt-4 text-[clamp(32px,3.8vw,46px)] font-extrabold leading-tight">
             Tecnologia que aparece na rotina, no caixa e no atendimento.
           </h2>
           <p className="mt-5 text-base leading-7 text-white/68 sm:text-lg sm:leading-8">
-            A operação fica mais previsível quando agenda, atendimento, equipe e indicadores trabalham no mesmo fluxo.
+            A operacao fica mais previsivel quando agenda, atendimento, equipe e indicadores trabalham no mesmo fluxo.
           </p>
-        </div>
-
-        <div className="order-2 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.055] p-3 shadow-[0_26px_76px_rgba(0,0,0,0.32)] lg:order-1">
-          <img src={cardClinic} alt="Equipe clínica em atendimento organizado" className="aspect-[16/10] w-full rounded-xl object-cover" />
+          <button
+            type="button"
+            onClick={() => scrollToElement("form-contato")}
+            className="mt-8 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#1CC88A] px-5 py-3.5 text-sm font-extrabold text-[#04110b] shadow-[0_18px_44px_rgba(28,200,138,0.28)] transition hover:bg-[#35df91] sm:w-auto"
+          >
+            Ver como aplicar na minha clinica
+            <ArrowRight className="h-5 w-5" />
+          </button>
         </div>
       </div>
-
-      <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3">
-        {benefits.map((benefit) => {
-          const Icon = benefit.icon;
-          return (
-            <article key={benefit.title} className="min-h-[168px] rounded-xl border border-white/10 bg-white/[0.045] p-5 backdrop-blur">
-              <span className="grid h-10 w-10 place-items-center rounded-md bg-emerald-300/12 text-emerald-300">
-                <Icon className="h-5 w-5" />
-              </span>
-              <h3 className="mt-5 text-lg font-extrabold leading-tight">{benefit.title}</h3>
-              <p className="mt-2 text-sm leading-6 text-white/62">{benefit.text}</p>
-            </article>
-          );
-        })}
-      </div>
-
-      <button
-        type="button"
-        onClick={() => scrollToElement("form-contato")}
-        className="mt-8 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#1CC88A] px-5 py-3.5 text-sm font-extrabold text-[#04110b] shadow-[0_18px_44px_rgba(28,200,138,0.28)] transition hover:bg-[#35df91] sm:w-auto "
-      >
-        Ver como aplicar na minha clínica
-        <ArrowRight className="h-5 w-5" />
-      </button>
     </div>
   </section>
 );
-
 const DevicesSection = () => (
   <section className="relative overflow-hidden bg-[#050709] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
     <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_48%,rgba(28,200,138,0.18),transparent_32%)]" />
@@ -716,33 +867,39 @@ const DevicesSection = () => (
 const DifferentialsSection = () => (
   <section className="relative overflow-hidden bg-[#050709] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
     <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(28,200,138,0.14),transparent_30%),radial-gradient(circle_at_78%_58%,rgba(30,136,229,0.16),transparent_34%)]" />
-    <div className="relative mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-14">
-      <div className="lg:pr-6">
-        <span className="inline-flex items-center rounded-full border border-emerald-300/30 bg-emerald-300/10 px-3 py-1 text-[0.7rem] font-bold uppercase tracking-[0.2em] text-emerald-300">
-          Diferencial Prontofy
-        </span>
-        <h2 className="mt-4 text-[clamp(34px,4vw,54px)] font-extrabold leading-tight">
-          Mais que um software médico. Um fluxo inteligente para a clínica.
-        </h2>
-        <p className="mt-6 text-lg leading-8 text-white/70">
-          Atendimento, gestão, automações e inteligência artificial conectados em uma operação moderna, segura e escalável.
-        </p>
-      </div>
-      <div className="relative rounded-2xl border border-white/10 bg-[#0a131e]/80 p-6 shadow-[0_28px_80px_rgba(0,0,0,0.35)] backdrop-blur sm:p-7 lg:ml-auto">
-        <div className="grid gap-4 sm:grid-cols-2">
-          {[
-            { icon: Bot, text: "IA no prontuário" },
-            { icon: MessageCircle, text: "WhatsApp integrado" },
-            { icon: Activity, text: "Dashboards operacionais" },
-            { icon: ShieldCheck, text: "Dados protegidos" },
-            { icon: CalendarCheck, text: "Agenda e automações" },
-          ].map((item) => {
+    <div className="relative mx-auto max-w-7xl">
+      <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start lg:gap-14">
+        <div className="lg:sticky lg:top-10">
+          <span className="inline-flex items-center rounded-full border border-emerald-300/30 bg-emerald-300/10 px-3 py-1 text-[0.7rem] font-bold uppercase tracking-[0.2em] text-emerald-300">
+            Diferencial Prontofy
+          </span>
+          <h2 className="mt-4 text-[clamp(34px,4vw,54px)] font-extrabold leading-tight">
+            Tudo que a clinica precisa em uma operacao conectada.
+          </h2>
+          <p className="mt-6 text-lg leading-8 text-white/70">
+            Pacientes, agenda, financeiro, CRM, relatorios, administracao e recursos de IA trabalhando no mesmo ambiente para reduzir retrabalho e acelerar decisoes.
+          </p>
+          <button
+            type="button"
+            onClick={() => scrollToElement("form-contato")}
+            className="mt-8 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#1CC88A] px-6 py-3.5 text-sm font-extrabold text-[#04110b] shadow-[0_18px_44px_rgba(28,200,138,0.28)] transition hover:bg-[#35df91] sm:w-auto"
+          >
+            Quero ver na minha clinica
+            <ArrowRight className="h-5 w-5" />
+          </button>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {platformModules.map((item) => {
             const Icon = item.icon;
             return (
-              <div key={item.text} className="rounded-xl border border-white/10 bg-[#0b1622]/90 p-5">
-                <Icon className="h-6 w-6 text-emerald-300" />
-                <p className="mt-4 text-sm font-bold text-white/90">{item.text}</p>
-              </div>
+              <article key={item.title} className="min-h-[154px] rounded-xl border border-white/10 bg-[#0b1622]/86 p-5 shadow-[0_22px_70px_rgba(0,0,0,0.22)] backdrop-blur transition hover:border-emerald-300/28 hover:bg-white/[0.075]">
+                <span className="grid h-10 w-10 place-items-center rounded-md bg-emerald-300/12 text-emerald-300">
+                  <Icon className="h-5 w-5" />
+                </span>
+                <h3 className="mt-4 text-base font-extrabold text-white">{item.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-white/62">{item.text}</p>
+              </article>
             );
           })}
         </div>
@@ -751,17 +908,135 @@ const DifferentialsSection = () => (
   </section>
 );
 
+const PRICING_CHECKOUT_URL = "https://prontofy.com.br/pricing";
+
+const PricingSection = () => (
+  <section id="planos" className="relative overflow-hidden bg-[#050709] px-5 py-20 text-white sm:px-8 lg:px-10 lg:py-24">
+    <div className="absolute inset-0 bg-[linear-gradient(180deg,#050709_0%,#071725_42%,#050709_100%)]" />
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_14%,rgba(28,200,138,0.16),transparent_30%),radial-gradient(circle_at_84%_28%,rgba(30,136,229,0.15),transparent_34%),radial-gradient(circle_at_48%_92%,rgba(28,200,138,0.10),transparent_34%)]" />
+    <div className="relative mx-auto max-w-7xl">
+      <div className="mx-auto max-w-3xl text-center">
+        <span className="inline-flex rounded-full border border-emerald-300/30 bg-emerald-300/10 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.18em] text-emerald-300">
+          Comparativo de planos
+        </span>
+        <h2 className="mt-5 text-[clamp(34px,4vw,54px)] font-extrabold leading-tight text-white">
+          Compare recursos, limites e inteligencia em cada plano.
+        </h2>
+        <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/68 sm:text-lg">
+          Uma visao direta para entender o que cada plano entrega em gestao, atendimento, agenda, financeiro e IA.
+        </p>
+      </div>
+
+      <div className="mt-12 overflow-hidden rounded-2xl border border-white/10 bg-[#07111a]/78 shadow-[0_34px_110px_rgba(0,0,0,0.42)] backdrop-blur-xl">
+        <div className="overflow-x-auto [scrollbar-width:thin] [scrollbar-color:#1CC88A_rgba(255,255,255,0.08)]">
+          <div className="min-w-[760px] lg:min-w-[980px]">
+            <div className="grid grid-cols-[minmax(210px,0.95fr)_repeat(3,minmax(150px,0.72fr))] lg:grid-cols-[minmax(290px,1.1fr)_repeat(3,minmax(190px,0.75fr))] border-b border-white/10 bg-white/[0.035]">
+              <div className="flex min-h-[160px] flex-col justify-center p-4 sm:min-h-[190px] sm:p-5 lg:min-h-[230px] lg:justify-end lg:p-6">
+                <p className="text-[0.64rem] font-black uppercase tracking-[0.16em] text-emerald-300 sm:text-xs sm:tracking-[0.18em]">Recursos Prontofy</p>
+                <p className="mt-2 max-w-[170px] text-xs font-semibold leading-5 text-white/58 sm:max-w-none sm:text-sm sm:leading-6">Clique em qualquer plano para ir ao checkout.</p>
+              </div>
+              {pricingPlans.map((plan) => (
+                <a
+                  key={plan.name}
+                  href={PRICING_CHECKOUT_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`group relative flex min-h-[160px] flex-col justify-between border-l border-white/10 p-4 text-center transition hover:bg-white/[0.075] sm:min-h-[190px] sm:p-5 lg:min-h-[230px] lg:p-6 ${plan.featured ? "bg-emerald-300/[0.075]" : "bg-black/10"}`}
+                >
+                  {plan.featured && (
+                    <span className="absolute left-1/2 top-0 -translate-x-1/2 rounded-b-xl bg-[#1CC88A] px-4 py-1.5 text-[0.68rem] font-black uppercase tracking-wide text-[#04110b] shadow-[0_16px_38px_rgba(28,200,138,0.24)]">
+                      Mais popular
+                    </span>
+                  )}
+                  <div className="pt-4 lg:pt-5">
+                    <h3 className="text-base font-black uppercase text-white sm:text-lg lg:text-xl">{plan.name}</h3>
+                    <p className="mt-3 text-[1.45rem] font-black leading-none text-white sm:text-[1.7rem] lg:mt-4 lg:text-[2rem]">{plan.price}</p>
+                    {plan.period && <p className="mt-1 text-[0.68rem] font-black uppercase tracking-wide text-white/50">{plan.period}</p>}
+                    <p className="mx-auto mt-3 max-w-[140px] text-[0.68rem] font-semibold leading-4 text-white/58 sm:max-w-[160px] sm:text-xs sm:leading-5 lg:mt-4">{plan.audience}</p>
+                  </div>
+                  <span className={`mt-4 inline-flex min-h-10 items-center justify-center gap-2 rounded-lg px-3 text-[0.65rem] font-black uppercase tracking-wide transition sm:min-h-11 sm:rounded-xl sm:px-4 sm:text-xs lg:mt-5 ${plan.featured ? "bg-[#1CC88A] text-[#04110b] group-hover:bg-[#35df91]" : "border border-white/12 bg-white/[0.06] text-white group-hover:border-emerald-300/30"}`}>
+                    {plan.button}
+                    <ArrowRight className="h-4 w-4" />
+                  </span>
+                </a>
+              ))}
+            </div>
+
+            {pricingComparisonGroups.map((group) => (
+              <div key={group.title}>
+                <div className="border-b border-white/10 bg-[#1CC88A]/10 px-5 py-3">
+                  <p className="text-[0.64rem] font-black uppercase tracking-[0.16em] text-emerald-300 sm:text-xs sm:tracking-[0.18em]">{group.title}</p>
+                </div>
+                {group.rows.map((row) => (
+                  <div key={row.label} className="grid min-h-[58px] grid-cols-[minmax(290px,1.1fr)_repeat(3,minmax(190px,0.75fr))] border-b border-white/10 transition hover:bg-white/[0.035]">
+                    <div className="flex flex-col justify-center px-5 py-3">
+                      <p className="text-sm font-extrabold leading-5 text-white">{row.label}</p>
+                      {row.description && <p className="mt-1 text-xs font-medium leading-5 text-white/42">{row.description}</p>}
+                    </div>
+                    {row.values.map((value, index) => (
+                      <div key={`${row.label}-${pricingPlans[index].name}`} className={`grid place-items-center border-l border-white/10 px-4 py-3 text-center ${pricingPlans[index].featured ? "bg-emerald-300/[0.045]" : ""}`}>
+                        {value === true ? (
+                          <CheckCircle2 className="h-5 w-5 text-emerald-300" />
+                        ) : value === false ? (
+                          <span className="h-1.5 w-6 rounded-full bg-white/18" aria-label="Nao incluso" />
+                        ) : (
+                          <span className="text-xs font-extrabold leading-5 text-white/78">{value}</span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+const FAQSection = () => (
+  <section className="relative overflow-hidden bg-[#071725] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
+    <div className="absolute inset-0 bg-[linear-gradient(180deg,#071725_0%,#050709_100%)]" />
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_22%,rgba(28,200,138,0.12),transparent_28%),radial-gradient(circle_at_82%_70%,rgba(30,136,229,0.13),transparent_34%)]" />
+    <div className="relative mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:gap-14">
+      <div>
+        <p className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300">FAQ</p>
+        <h2 className="mt-4 text-[clamp(32px,3.8vw,46px)] font-extrabold leading-tight">Perguntas frequentes antes de escolher a Prontofy.</h2>
+        <p className="mt-5 text-lg leading-8 text-white/68">Tire as principais duvidas sobre planos, IA, suporte e implantacao antes de conversar com um especialista.</p>
+      </div>
+      <div className="grid gap-4">
+        {faqs.map((faq) => (
+          <details key={faq.question} className="group rounded-xl border border-white/10 bg-white/[0.055] p-5 backdrop-blur open:border-emerald-300/28 open:bg-white/[0.075]">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-extrabold text-white">
+              <span>{faq.question}</span>
+              <ChevronDown className="h-5 w-5 shrink-0 text-emerald-300 transition group-open:rotate-180" />
+            </summary>
+            <p className="mt-4 text-sm leading-7 text-white/64">{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+);
 const HowItWorksSection = () => (
   <section className="relative overflow-hidden bg-[#071725] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
     <div className="absolute inset-0 bg-[linear-gradient(180deg,#050709_0%,#071725_22%,#0b2339_100%)]" />
-    <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-      <div className="overflow-hidden rounded-2xl border border-white/12 bg-white/[0.055] p-4 shadow-[0_28px_80px_rgba(0,0,0,0.32)]">
-        <img src={cardDashboard} alt="Dispositivos com dashboard clínico" className="aspect-[4/3] w-full rounded-xl object-cover" />
-      </div>
-      <div>
+    <div className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-12">
+      <div className="lg:hidden">
         <p className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300">Como funciona</p>
         <h2 className="mt-4 text-[clamp(32px,3.8vw,46px)] font-extrabold leading-tight">Uma implementação clara, acompanhada e progressiva.</h2>
-        <div className="mt-8 grid gap-5">
+      </div>
+
+      <div className="overflow-hidden rounded-2xl border border-white/12 bg-white/[0.055] p-4 shadow-[0_28px_80px_rgba(0,0,0,0.32)]">
+        <img src={implementacaoImage} alt="Implementacao acompanhada da Prontofy na rotina clinica" className="aspect-[4/3] w-full rounded-xl object-cover" />
+      </div>
+
+      <div>
+        <div className="hidden lg:block">
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300">Como funciona</p>
+          <h2 className="mt-4 text-[clamp(32px,3.8vw,46px)] font-extrabold leading-tight">Uma implementação clara, acompanhada e progressiva.</h2>
+        </div>
+        <div className="mt-8 grid gap-5 lg:mt-8">
           {steps.map((step) => {
             const Icon = step.icon;
             return (
@@ -789,30 +1064,55 @@ const HowItWorksSection = () => (
     </div>
   </section>
 );
+const BeforeAfterSection = () => {
+  const mobileCarouselRef = useRef<HTMLDivElement>(null);
 
-const BeforeAfterSection = () => (
-  <section className="relative overflow-hidden bg-[#050709] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(28,200,138,0.12),transparent_40%)]" />
-    <div className="relative mx-auto max-w-7xl">
-      <h2 className="mx-auto max-w-3xl text-center text-[clamp(32px,3.8vw,46px)] font-extrabold leading-tight">
-        Do operacional pesado para uma rotina inteligente.
-      </h2>
-      <div className="mt-12 hidden gap-5 lg:grid lg:grid-cols-2">
-        <CompareCard image={antesImage} label="Antes" title="Sobrecarga e desorganização" items={["Atrasos e mensagens acumuladas", "Retrabalho administrativo", "Estresse operacional constante"]} />
-        <CompareCard image={depoisImage} label="Depois" title="Controle, produtividade e qualidade de vida" items={["Dashboards inteligentes", "Automações e IA na rotina", "Equipe com clareza para executar"]} highlight />
-      </div>
-      <div className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-4 lg:hidden [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-        <div className="flex min-w-[84vw] snap-center">
+  useEffect(() => {
+    const carousel = mobileCarouselRef.current;
+    if (!carousel) return;
+
+    const mediaQuery = window.matchMedia("(max-width: 1023px)");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (!mediaQuery.matches || prefersReducedMotion.matches) return;
+
+    let currentIndex = 0;
+    const intervalId = window.setInterval(() => {
+      const cards = Array.from(carousel.children) as HTMLElement[];
+      if (cards.length < 2) return;
+
+      currentIndex = (currentIndex + 1) % cards.length;
+      carousel.scrollTo({ left: cards[currentIndex].offsetLeft, behavior: "smooth" });
+    }, 2800);
+
+    return () => window.clearInterval(intervalId);
+  }, []);
+
+  return (
+    <section className="relative overflow-hidden bg-[#050709] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(28,200,138,0.12),transparent_40%)]" />
+      <div className="relative mx-auto max-w-7xl">
+        <h2 className="mx-auto max-w-3xl text-center text-[clamp(32px,3.8vw,46px)] font-extrabold leading-tight">
+          Do operacional pesado para uma rotina inteligente.
+        </h2>
+        <div className="mt-12 hidden gap-5 lg:grid lg:grid-cols-2">
           <CompareCard image={antesImage} label="Antes" title="Sobrecarga e desorganização" items={["Atrasos e mensagens acumuladas", "Retrabalho administrativo", "Estresse operacional constante"]} />
-        </div>
-        <div className="flex min-w-[84vw] snap-center">
           <CompareCard image={depoisImage} label="Depois" title="Controle, produtividade e qualidade de vida" items={["Dashboards inteligentes", "Automações e IA na rotina", "Equipe com clareza para executar"]} highlight />
         </div>
+        <div
+          ref={mobileCarouselRef}
+          className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-4 lg:hidden [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+        >
+          <div className="flex min-w-[84vw] snap-center">
+            <CompareCard image={antesImage} label="Antes" title="Sobrecarga e desorganização" items={["Atrasos e mensagens acumuladas", "Retrabalho administrativo", "Estresse operacional constante"]} />
+          </div>
+          <div className="flex min-w-[84vw] snap-center">
+            <CompareCard image={depoisImage} label="Depois" title="Controle, produtividade e qualidade de vida" items={["Dashboards inteligentes", "Automações e IA na rotina", "Equipe com clareza para executar"]} highlight />
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-);
-
+    </section>
+  );
+};
 const FinalCTASection = () => (
   <section className="relative overflow-hidden bg-[#050709] px-5 py-20 text-center sm:px-8 lg:px-10 lg:py-24">
     <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,rgba(28,200,138,0.18),transparent_34%)]" />
