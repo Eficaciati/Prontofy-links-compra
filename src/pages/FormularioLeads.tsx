@@ -822,6 +822,7 @@ const BenefitsSection = () => (
     </div>
   </section>
 );
+
 const DevicesSection = () => (
   <section className="relative overflow-hidden bg-[#050709] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
     <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_48%,rgba(28,200,138,0.18),transparent_32%)]" />

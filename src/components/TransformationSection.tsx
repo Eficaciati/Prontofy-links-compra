@@ -1,87 +1,43 @@
-import { ArrowRight, CheckCircle2, Clock3, TrendingUp } from "lucide-react";
-import automacoesImage from "@/assets/automacoes.png";
-import antesImage from "@/assets/antes.png";
-import depoisImage from "@/assets/depois.png";
-
-const gains = [
-  {
-    icon: Clock3,
-    label: "Menos tempo perdido",
-    text: "Agenda, prontuario e atendimentos conectados em um fluxo mais leve.",
-  },
-  {
-    icon: TrendingUp,
-    label: "Mais clareza para decidir",
-    text: "Indicadores organizados para enxergar gargalos e oportunidades.",
-  },
-  {
-    icon: CheckCircle2,
-    label: "Rotina mais previsivel",
-    text: "Processos simples para sua equipe executar melhor todos os dias.",
-  },
-];
+import antesDepoisImage from "@/assets/antes-depois.png";
 
 const TransformationSection = () => {
   return (
-    <section className="relative overflow-hidden bg-[#050709] px-5 pb-20 pt-10 text-white sm:px-8 lg:px-10 lg:pb-28 lg:pt-14">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_24%,rgba(25,200,121,0.11),transparent_30%),radial-gradient(circle_at_76%_62%,rgba(30,136,229,0.14),transparent_34%)]" />
-      <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-        <div className="lead-enter">
-          <p className="mb-4 inline-flex rounded-full border border-white/12 bg-white/7 px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-emerald-300 backdrop-blur">
+    <section className="relative overflow-hidden bg-[#050709] px-4 py-10 text-white sm:px-8 sm:py-12 lg:px-10 lg:py-16">
+      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-2xl border border-white/12 bg-black shadow-[0_28px_90px_rgba(0,0,0,0.42)]">
+        <img
+          src={antesDepoisImage}
+          alt="Comparativo visual antes e depois da gestao Prontofy"
+          className="h-[620px] w-full object-cover object-[57%_50%] sm:h-[640px] sm:object-center lg:h-[620px]"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,7,9,0.78)_0%,rgba(5,7,9,0.48)_46%,rgba(5,7,9,0.08)_100%)] sm:bg-[linear-gradient(90deg,rgba(5,7,9,0.76)_0%,rgba(5,7,9,0.44)_42%,rgba(5,7,9,0.1)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,7,9,0.2)_0%,rgba(5,7,9,0.02)_42%,rgba(5,7,9,0.72)_100%)] sm:bg-[linear-gradient(180deg,rgba(5,7,9,0.08)_0%,rgba(5,7,9,0.02)_48%,rgba(5,7,9,0.58)_100%)]" />
+
+        <div className="absolute inset-0 z-10 flex flex-col justify-between px-4 py-6 sm:px-8 sm:py-10 lg:px-12 lg:py-12">
+          <div className="lead-enter max-w-[315px] sm:max-w-3xl">
+          <p className="mb-4 inline-flex rounded-full border border-white/12 bg-white/7 px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-emerald-300 backdrop-blur sm:px-4 sm:text-sm sm:tracking-[0.18em]">
             Transformacao na gestao
           </p>
-          <h2 className="max-w-3xl text-[clamp(34px,4vw,56px)] font-extrabold leading-[1.02] text-white">
+          <h2 className="max-w-3xl text-[2rem] font-extrabold leading-[1] text-white drop-shadow-[0_14px_36px_rgba(0,0,0,0.68)] sm:text-[clamp(34px,4vw,58px)]">
             Saia da rotina reativa para uma clinica mais previsivel.
           </h2>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-white/70">
+          <p className="mt-4 max-w-[285px] text-sm font-medium leading-6 text-white/74 drop-shadow-[0_8px_22px_rgba(0,0,0,0.72)] sm:mt-6 sm:max-w-2xl sm:text-lg sm:font-normal sm:leading-8 sm:text-white/70">
             A Prontofy ajuda sua equipe a trocar controles soltos por uma operacao centralizada, clara e pronta para crescer.
           </p>
-
-          <div className="mt-8 grid gap-4">
-            {gains.map((gain) => {
-              const Icon = gain.icon;
-              return (
-                <article key={gain.label} className="flex gap-4 rounded-lg border border-white/10 bg-white/[0.06] p-4 backdrop-blur">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-emerald-400/12 text-emerald-300">
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <div>
-                    <h3 className="text-base font-bold text-white">{gain.label}</h3>
-                    <p className="mt-1 text-sm leading-6 text-white/64">{gain.text}</p>
-                  </div>
-                </article>
-              );
-            })}
           </div>
-        </div>
 
-        <div className="relative">
-          <div className="absolute -inset-6 rounded-[2rem] bg-[radial-gradient(circle_at_50%_50%,rgba(25,200,121,0.15),transparent_62%)] blur-2xl" />
-          <div className="relative overflow-hidden rounded-lg border border-white/12 bg-white/[0.055] p-4 shadow-[0_28px_90px_rgba(0,0,0,0.32)] backdrop-blur">
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="rounded-lg border border-white/10 bg-[#071016] p-4">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/45">Antes</p>
-                <img src={antesImage} alt="" className="mt-4 aspect-[4/3] w-full rounded-md object-cover opacity-72" />
-                <p className="mt-4 text-xl font-extrabold text-white">Dados espalhados</p>
-                <p className="mt-2 text-sm leading-6 text-white/58">Decisoes dependem de planilhas, memoria da equipe e retrabalho.</p>
-              </div>
-
-              <div className="rounded-lg border border-emerald-300/24 bg-emerald-400/[0.08] p-4 shadow-[0_18px_54px_rgba(25,200,121,0.12)]">
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-emerald-300">Depois</p>
-                <img src={depoisImage} alt="" className="mt-4 aspect-[4/3] w-full rounded-md object-cover" />
-                <p className="mt-4 text-xl font-extrabold text-white">Gestao visivel</p>
-                <p className="mt-2 text-sm leading-6 text-white/68">Indicadores, rotina e atendimento alinhados para agir com clareza.</p>
-              </div>
+          <div className="lead-enter lead-enter-delay-2 grid grid-cols-2 items-end gap-4 pb-7 sm:pb-10 lg:pb-12">
+            <div className="max-w-[280px]">
+              <p className="text-[0.65rem] font-black uppercase tracking-[0.2em] text-white/60 sm:text-xs">Antes</p>
+              <h3 className="mt-1 text-lg font-extrabold leading-tight text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.82)] sm:mt-2 sm:text-2xl">
+                Dados espalhados
+              </h3>
             </div>
-
-            <div className="mt-4 flex items-center justify-between gap-3 rounded-lg border border-white/10 bg-black/28 p-4">
-              <img src={automacoesImage} alt="" className="h-14 w-14 rounded-md object-cover" />
-              <div className="min-w-0 flex-1">
-                <p className="text-sm font-bold text-white">Automacoes e IA trabalhando junto com a equipe</p>
-                <p className="mt-1 text-xs text-white/55">Menos tarefas manuais, mais tempo para cuidar do paciente.</p>
+            <div className="max-w-[280px] justify-self-end text-right">
+              <p className="text-[0.65rem] font-black uppercase tracking-[0.2em] text-emerald-300 sm:text-xs">Depois</p>
+              <h3 className="mt-1 text-lg font-extrabold leading-tight text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.82)] sm:mt-2 sm:text-2xl">
+                Gestao visivel
+              </h3>
               </div>
-              <ArrowRight className="h-5 w-5 shrink-0 text-emerald-300" />
-            </div>
           </div>
         </div>
       </div>

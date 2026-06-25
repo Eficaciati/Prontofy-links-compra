@@ -42,9 +42,9 @@ const cards = [
 
 const FeaturesSection = () => {
   return (
-    <section className="relative w-full py-16 sm:py-24 lg:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-12 text-center">
+    <section className="relative w-full py-16 sm:py-24 lg:py-12 xl:py-14">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:max-w-[1000px] lg:px-8 xl:max-w-[1060px]">
+        <div className="mb-12 text-center lg:mb-7 xl:mb-8">
           <h2 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
             Conheça o <span className="text-primary">Prontofy</span>
           </h2>
@@ -53,7 +53,7 @@ const FeaturesSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-5 xl:gap-5">
           {cards.map((card) => (
             <FeatureCard key={card.title} {...card} />
           ))}

@@ -1,6 +1,9 @@
 import { CalendarCheck, MessageCircle, Play } from "lucide-react";
+import AgendaAISection from "./AgendaAISection";
+import AudienceSection from "./AudienceSection";
 import AuthoritySection from "./AuthoritySection";
 import CTASection from "./CTASection";
+import FAQSection from "./FAQSection";
 import ProntofyLogo from "./ProntofyLogo";
 import ProductSection from "./ProductSection";
 import TransformationSection from "./TransformationSection";
@@ -107,7 +110,10 @@ const TemporaryHero = () => {
       </section>
       <AuthoritySection />
       <TransformationSection />
+      <AudienceSection />
       <ProductSection />
+      <AgendaAISection />
+      <FAQSection />
       <CTASection />
     </main>
   );
