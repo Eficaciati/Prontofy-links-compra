@@ -1,4 +1,4 @@
-import { ArrowRight, Bot, ClipboardPenLine, LayoutDashboard, Stethoscope } from "lucide-react";
+import { Bot, ClipboardPenLine, LayoutDashboard, Stethoscope } from "lucide-react";
 
 const WHATSAPP_LINK = "https://wa.me/message/YO6R73FVJZHTC1";
 
@@ -64,7 +64,6 @@ const ProductSection = () => {
         <div className="mt-10 flex justify-center lg:mt-14">
           <a href={WHATSAPP_LINK} target="_blank" rel="noreferrer" className="btn-primary w-[88%] sm:w-auto">
             Quero evoluir meus atendimentos
-            <ArrowRight className="h-4 w-4" />
           </a>
         </div>
       </div>

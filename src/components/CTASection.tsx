@@ -1,12 +1,12 @@
-import { ArrowRight, Cloud, DatabaseZap, LockKeyhole, ShieldCheck, Star, Zap } from "lucide-react";
+import { Bot, CalendarCheck, Headphones, MessageCircle, ShieldCheck, Stethoscope } from "lucide-react";
 
 const trustBadges = [
-  { icon: Star, title: "NPS 98%", label: "NPS 98%" },
-  { icon: ShieldCheck, title: "ISO 27001", label: "ISO 27001" },
-  { icon: LockKeyhole, title: "LGPD Ready", label: "LGPD Ready" },
-  { icon: Cloud, title: "Hospedagem AWS", label: "Hospedagem AWS" },
-  { icon: DatabaseZap, title: "Data Encrypted", label: "Data Encrypted" },
-  { icon: Zap, title: "100% Uptime 2025", label: "100% Uptime 2025" },
+  { icon: CalendarCheck, title: "Agenda organizada", label: "Agenda organizada" },
+  { icon: Stethoscope, title: "Prontuário mais simples", label: "Prontuário simples" },
+  { icon: MessageCircle, title: "WhatsApp integrado", label: "WhatsApp integrado" },
+  { icon: Bot, title: "IA apoiando a equipe", label: "IA para a rotina" },
+  { icon: Headphones, title: "Suporte na implantação", label: "Implantação guiada" },
+  { icon: ShieldCheck, title: "Dados protegidos", label: "Dados protegidos" },
 ];
 
 const CTASection = () => {
@@ -18,16 +18,15 @@ const CTASection = () => {
 
       <div className="relative mx-auto max-w-7xl">
         <h2 className="mx-auto max-w-3xl text-[clamp(30px,3.4vw,38px)] font-semibold leading-tight text-white">
-          Pronto para levar seus atendimentos a outro nível?
+          Pronto para simplificar a rotina da sua clínica?
         </h2>
         <p className="mx-auto mt-3.5 max-w-[680px] text-base leading-7 text-white/80 sm:text-lg">
-          O próximo passo é simples. Conte com o Prontofy e foco total nos seus pacientes.
+          Agende uma apresentação e veja como agenda, prontuário, WhatsApp e IA podem trabalhar juntos no atendimento.
         </p>
 
         <div className="mt-10 flex justify-center">
           <a href="/formulario" aria-label="Agendar demonstração" className="btn-primary w-[88vw] sm:w-auto sm:px-12">
-            Quero aprimorar meus atendimentos
-            <ArrowRight className="h-4 w-4" />
+            Agendar minha apresentação
           </a>
         </div>
 

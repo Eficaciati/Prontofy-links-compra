@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowDown, ArrowRight } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import cardDashboard from "@/assets/card-dashboard.jpg";
 import mapaBrasil from "@/assets/mapa-brasil.jpg";
 import acreImage from "@/assets/acre.png";
@@ -55,7 +55,6 @@ const AuthoritySection = () => {
         <div className="mt-12 flex w-full justify-center">
           <a href="https://wa.me/message/YO6R73FVJZHTC1" target="_blank" rel="noreferrer" className="btn-primary mx-auto w-[88%] sm:w-auto">
             Quero evoluir meus atendimentos
-            <ArrowRight className="h-4 w-4" />
           </a>
         </div>
       </div>

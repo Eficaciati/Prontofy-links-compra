@@ -398,7 +398,7 @@ const FormularioLeads = () => {
                 <span className="text-[#1CC88A]">modernas e inteligentes</span>
               </h1>
               <p className="mt-8 max-w-2xl text-base leading-7 text-white/82 sm:text-lg lg:text-xl lg:leading-8">
-                Entenda como a Prontofy pode organizar sua operação, automatizar rotinas e devolver mais tempo para sua equipe cuidar dos pacientes.
+                Nossos Consultores Executivos vão ajudar você a ter mais faturamento e qualidade de vida com o seu consultório, solicite sua consultoria.
               </p>
               <button
                 type="button"
@@ -711,37 +711,44 @@ const PainSection = () => {
 };
 
 const LifestyleSection = () => (
-  <section className="relative overflow-hidden bg-[#071725] px-5 py-16 sm:px-8 sm:py-20 lg:px-10 lg:py-24">
-    <div className="absolute inset-0 bg-[linear-gradient(135deg,#050709_0%,#0b2339_52%,#071725_100%)]" />
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_72%,rgba(28,200,138,0.14),transparent_30%),radial-gradient(circle_at_78%_20%,rgba(30,136,229,0.14),transparent_34%)]" />
-    <div className="relative mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:gap-14">
-      <div>
-        <p className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300">Qualidade de vida</p>
-        <h2 className="mt-4 max-w-2xl text-[clamp(34px,4vw,54px)] font-extrabold leading-[1.04]">
+  <section className="relative min-h-[720px] overflow-hidden bg-[#050709] text-white sm:min-h-[760px] lg:min-h-[820px]">
+    <img
+      src={madrugadaTristeImage}
+      alt="Médico trabalhando até tarde em um consultório"
+      className="absolute inset-0 h-full w-full object-cover object-[58%_50%] sm:object-center"
+    />
+    <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,7,9,0.9)_0%,rgba(5,7,9,0.64)_44%,rgba(5,7,9,0.14)_100%)]" />
+    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,7,9,0.22)_0%,rgba(5,7,9,0.12)_45%,rgba(5,7,9,0.82)_100%)]" />
+    <div className="absolute inset-x-0 top-0 h-28 bg-[linear-gradient(180deg,#050709_0%,rgba(5,7,9,0)_100%)]" />
+    <div className="absolute inset-x-0 bottom-0 h-28 bg-[linear-gradient(180deg,rgba(5,7,9,0)_0%,#050709_100%)]" />
+
+    <div className="relative z-10 mx-auto flex min-h-[720px] max-w-7xl items-end px-5 py-14 sm:min-h-[760px] sm:px-8 sm:py-16 lg:min-h-[820px] lg:px-10 lg:py-20">
+      <div className="max-w-2xl">
+        <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-300 sm:text-sm">Qualidade de vida</p>
+        <h2 className="mt-4 text-[clamp(36px,4.6vw,64px)] font-extrabold leading-[0.98] text-white drop-shadow-[0_14px_40px_rgba(0,0,0,0.62)]">
           Sua clínica não precisa acompanhar você até em casa.
         </h2>
-        <p className="mt-6 max-w-2xl text-lg leading-8 text-white/70">
+        <p className="mt-5 max-w-xl text-base leading-7 text-white/78 drop-shadow-[0_10px_26px_rgba(0,0,0,0.62)] sm:text-lg sm:leading-8">
           Mensagens até tarde, prontuários pendentes e decisões no improviso drenam energia. A Prontofy devolve controle, tranquilidade e organização para uma rotina mais leve.
         </p>
+
         <div className="mt-8 grid gap-3 sm:grid-cols-2">
           {lifestyleHighlights.map((item) => (
-            <article key={item.value} className="rounded-xl border border-white/10 bg-white/[0.055] p-5 backdrop-blur">
+            <div key={item.value} className="border-l-2 border-emerald-300/80 pl-4">
               <h3 className="text-base font-extrabold text-white">{item.value}</h3>
-              <p className="mt-2 text-sm leading-6 text-white/64">{item.text}</p>
-            </article>
+              <p className="mt-1 text-sm leading-6 text-white/68">{item.text}</p>
+            </div>
           ))}
         </div>
+
         <button
           type="button"
           onClick={() => scrollToElement("form-contato")}
-          className="scroll-smooth mt-8 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#1CC88A] px-6 py-3.5 text-sm font-extrabold text-[#04110b] shadow-[0_18px_44px_rgba(28,200,138,0.28)] transition hover:bg-[#35df91] sm:w-auto"
+          className="scroll-smooth mt-9 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#1CC88A] px-6 py-3.5 text-sm font-extrabold text-[#04110b] shadow-[0_18px_44px_rgba(28,200,138,0.28)] transition hover:bg-[#35df91] sm:w-auto"
         >
           Recuperar controle da rotina
           <ArrowRight className="h-5 w-5" />
         </button>
-      </div>
-      <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.055] p-3 shadow-[0_28px_80px_rgba(0,0,0,0.28)]">
-        <img src={madrugadaTristeImage} alt="Médico trabalhando até tarde em um consultório" className="aspect-[4/3] w-full rounded-xl object-cover" />
       </div>
     </div>
   </section>
@@ -1020,39 +1027,26 @@ const FAQSection = () => (
   </section>
 );
 const HowItWorksSection = () => (
-  <section className="relative overflow-hidden bg-[#071725] px-5 py-20 sm:px-8 lg:px-10 lg:py-24">
-    <div className="absolute inset-0 bg-[linear-gradient(180deg,#050709_0%,#071725_22%,#0b2339_100%)]" />
-    <div className="relative mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-12">
-      <div className="lg:hidden">
-        <p className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300">Como funciona</p>
-        <h2 className="mt-4 text-[clamp(32px,3.8vw,46px)] font-extrabold leading-tight">Uma implementação clara, acompanhada e progressiva.</h2>
-      </div>
+  <section className="relative min-h-[860px] overflow-hidden bg-[#050709] text-white sm:min-h-[900px] lg:min-h-[820px]">
+    <img
+      src={implementacaoImage}
+      alt="Implementacao acompanhada da Prontofy na rotina clinica"
+      className="absolute inset-0 h-full w-full object-cover object-[42%_50%] lg:object-center"
+    />
+    <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,7,9,0.9)_0%,rgba(5,7,9,0.58)_46%,rgba(5,7,9,0.18)_100%)]" />
+    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,7,9,0.42)_0%,rgba(5,7,9,0.08)_42%,rgba(5,7,9,0.88)_100%)]" />
+    <div className="absolute inset-x-0 top-0 h-32 bg-[linear-gradient(180deg,#050709_0%,rgba(5,7,9,0)_100%)]" />
+    <div className="absolute inset-x-0 bottom-0 h-32 bg-[linear-gradient(180deg,rgba(5,7,9,0)_0%,#050709_100%)]" />
 
-      <div className="overflow-hidden rounded-2xl border border-white/12 bg-white/[0.055] p-4 shadow-[0_28px_80px_rgba(0,0,0,0.32)]">
-        <img src={implementacaoImage} alt="Implementacao acompanhada da Prontofy na rotina clinica" className="aspect-[4/3] w-full rounded-xl object-cover" />
-      </div>
-
-      <div>
-        <div className="hidden lg:block">
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300">Como funciona</p>
-          <h2 className="mt-4 text-[clamp(32px,3.8vw,46px)] font-extrabold leading-tight">Uma implementação clara, acompanhada e progressiva.</h2>
-        </div>
-        <div className="mt-8 grid gap-5 lg:mt-8">
-          {steps.map((step) => {
-            const Icon = step.icon;
-            return (
-              <article key={step.title} className="flex gap-4 rounded-xl border border-white/10 bg-white/[0.055] p-5 backdrop-blur">
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-emerald-300/12 text-emerald-300">
-                  <Icon className="h-5 w-5" />
-                </span>
-                <div>
-                  <h3 className="text-sm font-extrabold text-emerald-300 sm:text-base">{step.title}</h3>
-                  <p className="mt-1 text-sm leading-6 text-white/64">{step.text}</p>
-                </div>
-              </article>
-            );
-          })}
-        </div>
+    <div className="relative z-10 mx-auto grid min-h-[860px] max-w-7xl gap-10 px-5 py-16 sm:min-h-[900px] sm:px-8 sm:py-20 lg:min-h-[820px] lg:grid-cols-[0.92fr_1.08fr] lg:items-end lg:px-10 lg:py-20">
+      <div className="max-w-2xl self-start lg:self-end">
+        <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-300 sm:text-sm">Como funciona</p>
+        <h2 className="mt-4 text-[clamp(38px,5vw,68px)] font-extrabold leading-[0.98] text-white drop-shadow-[0_16px_44px_rgba(0,0,0,0.64)]">
+          Uma implementação clara, acompanhada e progressiva.
+        </h2>
+        <p className="mt-5 max-w-xl text-base leading-7 text-white/76 drop-shadow-[0_10px_26px_rgba(0,0,0,0.62)] sm:text-lg sm:leading-8">
+          A Prontofy entra na rotina da clínica com diagnóstico, configuração guiada e acompanhamento para sua equipe evoluir sem perder o controle.
+        </p>
         <button
           type="button"
           onClick={() => scrollToElement("form-contato")}
@@ -1061,6 +1055,27 @@ const HowItWorksSection = () => (
           Quero implementar com a Prontofy
           <ArrowRight className="h-5 w-5" />
         </button>
+      </div>
+
+      <div className="grid gap-4 self-end lg:justify-self-end">
+        {steps.map((step, index) => {
+          const Icon = step.icon;
+          return (
+            <article
+              key={step.title}
+              className="relative flex gap-4 rounded-xl border border-white/12 bg-[#050709]/52 p-4 shadow-[0_20px_60px_rgba(0,0,0,0.34)] backdrop-blur-md sm:p-5 lg:w-[520px]"
+            >
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-emerald-300/22 bg-emerald-300/12 text-emerald-300">
+                <Icon className="h-5 w-5" />
+              </span>
+              <div>
+                <p className="text-[0.68rem] font-black uppercase tracking-[0.18em] text-white/42">Passo {index + 1}</p>
+                <h3 className="mt-1 text-sm font-extrabold text-emerald-300 sm:text-base">{step.title}</h3>
+                <p className="mt-1.5 text-sm leading-6 text-white/66">{step.text}</p>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </div>
   </section>
