@@ -1,4 +1,5 @@
 import { Bot, ClipboardPenLine, LayoutDashboard, Stethoscope } from "lucide-react";
+import prontuarioEletro from "@/assets/prontuario-eletro.png";
 
 const WHATSAPP_LINK = "https://wa.me/message/YO6R73FVJZHTC1";
 
@@ -27,41 +28,48 @@ const productFeatures = [
 
 const ProductSection = () => {
   return (
-    <section className="relative overflow-hidden bg-[#0b2339] px-5 py-20 text-white sm:px-8 lg:px-10 lg:py-24">
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,#050709_0%,#071522_12%,#0b2339_28%,#0b2339_78%,#082034_100%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(25,200,121,0.12),transparent_30%),radial-gradient(circle_at_84%_44%,rgba(30,136,229,0.18),transparent_34%)]" />
+    <section className="relative min-h-[760px] overflow-hidden bg-[#050709] text-white sm:min-h-[800px] lg:min-h-[860px]">
+      <img
+        src={prontuarioEletro}
+        alt="Prontuário eletrônico Prontofy em múltiplos dispositivos"
+        className="absolute inset-0 h-full w-full scale-[1.05] object-cover object-center"
+      />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,7,9,0.88)_0%,rgba(5,7,9,0.58)_42%,rgba(5,7,9,0.2)_100%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,7,9,0.38)_0%,rgba(5,7,9,0.06)_46%,rgba(5,7,9,0.82)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_66%_44%,rgba(28,200,138,0.16),transparent_28%),radial-gradient(circle_at_42%_58%,rgba(30,136,229,0.16),transparent_36%)]" />
       <div className="absolute inset-x-0 top-0 h-28 bg-[linear-gradient(180deg,#050709_0%,rgba(5,7,9,0)_100%)]" />
-      <div className="absolute inset-x-0 bottom-0 h-32 bg-[linear-gradient(180deg,rgba(11,35,57,0)_0%,#082034_100%)]" />
-      <div className="relative mx-auto max-w-7xl">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-[clamp(32px,3.8vw,40px)] font-semibold leading-tight text-white">
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-[linear-gradient(180deg,rgba(5,7,9,0)_0%,#050709_100%)]" />
+
+      <div className="relative z-10 mx-auto flex min-h-[760px] max-w-7xl flex-col justify-between px-5 py-16 sm:min-h-[800px] sm:px-8 sm:py-20 lg:min-h-[860px] lg:px-10 lg:py-24">
+        <div className="max-w-3xl">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-300 sm:text-sm">Prontuário eletrônico</p>
+          <h2 className="mt-4 text-[clamp(38px,5vw,68px)] font-extrabold leading-[0.98] text-white drop-shadow-[0_16px_44px_rgba(0,0,0,0.64)]">
             O Prontuário Eletrônico que se adapta à sua rotina
           </h2>
-          <p className="mx-auto mt-3 max-w-[720px] text-base leading-7 text-white/80 sm:text-lg">
+          <p className="mt-5 max-w-2xl text-base leading-7 text-white/76 drop-shadow-[0_10px_26px_rgba(0,0,0,0.62)] sm:text-lg sm:leading-8">
             Personalize templates, organize sua operação e conte com IA no WhatsApp.
           </p>
         </div>
 
-        <div className="mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 sm:grid sm:snap-none sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:pb-0 lg:mx-auto lg:max-w-5xl lg:gap-6">
+        <div className="mt-12 grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-4 lg:max-w-5xl lg:gap-x-10">
           {productFeatures.map((feature) => {
             const Icon = feature.icon;
 
             return (
-              <article
-                key={feature.title}
-                className="min-h-[260px] flex-[0_0_82vw] snap-center rounded-lg border border-white/10 bg-white/[0.06] p-8 shadow-[0_18px_60px_rgba(0,0,0,0.2)] backdrop-blur transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_32px_rgba(0,0,0,0.4)] sm:min-h-[230px] sm:flex-auto sm:p-7 lg:min-h-[210px] lg:p-6"
-              >
-                <div className="grid h-14 w-14 place-items-center rounded-md border border-emerald-300/20 bg-emerald-300/12 text-emerald-300 lg:h-12 lg:w-12">
-                  <Icon className="h-7 w-7 lg:h-6 lg:w-6" />
-                </div>
-                <h3 className="mt-5 text-[22px] font-semibold leading-tight text-white lg:mt-4 lg:text-xl">{feature.title}</h3>
-                <p className="mt-3 text-base leading-7 text-white/76 lg:text-sm lg:leading-6">{feature.text}</p>
-              </article>
+              <div key={feature.title} className="flex flex-col items-center text-center sm:items-start sm:text-left">
+                <Icon className="h-11 w-11 text-white drop-shadow-[0_8px_22px_rgba(0,0,0,0.8)] sm:h-12 sm:w-12" strokeWidth={1.65} />
+                <h3 className="mt-4 text-base font-extrabold leading-tight text-white drop-shadow-[0_8px_22px_rgba(0,0,0,0.8)] sm:text-lg">
+                  {feature.title}
+                </h3>
+                <p className="mt-2 max-w-[220px] text-sm leading-6 text-white/70 drop-shadow-[0_8px_22px_rgba(0,0,0,0.72)]">
+                  {feature.text}
+                </p>
+              </div>
             );
           })}
         </div>
 
-        <div className="mt-10 flex justify-center lg:mt-14">
+        <div className="mt-12 flex justify-center sm:justify-start">
           <a href={WHATSAPP_LINK} target="_blank" rel="noreferrer" className="btn-primary w-[88%] sm:w-auto">
             Quero evoluir meus atendimentos
           </a>
