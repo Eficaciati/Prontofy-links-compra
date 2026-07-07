@@ -8,6 +8,8 @@ import ConfiguracaoSecretariaIA from "./pages/ConfiguracaoSecretariaIA";
 import FormularioLeads from "./pages/FormularioLeads";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import SecretariaVirtual from "./pages/SecretariaVirtual";
+import Telemedicina from "./pages/Telemedicina";
 import { CookieConsent } from "@/components/CookieConsent";
 
 const queryClient = new QueryClient();
@@ -23,6 +25,8 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/apresentacao" element={<Apresentacao />} />
           <Route path="/formulario" element={<FormularioLeads />} />
+          <Route path="/secretaria-virtual" element={<SecretariaVirtual />} />
+          <Route path="/telemedicina" element={<Telemedicina />} />
           <Route path="/configuracao-secretaria-ia" element={<ConfiguracaoSecretariaIA />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

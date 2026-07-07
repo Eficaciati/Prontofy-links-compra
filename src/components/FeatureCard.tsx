@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import type { MouseEvent } from "react";
 import { trackEvent } from "@/utils/track";
 
 interface FeatureCardProps {
@@ -8,19 +9,21 @@ interface FeatureCardProps {
   buttonText: string;
   link: string;
   accent?: string;
+  onClick?: (event: MouseEvent<HTMLAnchorElement>) => void;
 }
 
-const FeatureCard = ({ image, title, description, buttonText, link, accent = "from-black/90 via-black/60" }: FeatureCardProps) => {
+const FeatureCard = ({ image, title, description, buttonText, link, accent = "from-black/90 via-black/60", onClick }: FeatureCardProps) => {
   return (
     <a
       href={link}
-      onClick={() =>
+      onClick={(event) => {
         trackEvent("cta_click", {
           location: "feature_card",
           button_text: buttonText,
           feature_title: title,
-        })
-      }
+        });
+        onClick?.(event);
+      }}
       className="group relative block overflow-hidden rounded-lg border border-white/10 transition-all duration-300 hover:scale-[1.02] hover:border-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       style={{ boxShadow: "0 8px 32px -8px rgba(0,0,0,0.5)" }}
     >

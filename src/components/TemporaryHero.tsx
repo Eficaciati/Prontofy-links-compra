@@ -113,8 +113,8 @@ const TemporaryHero = () => {
       <AudienceSection />
       <ProductSection />
       <AgendaAISection />
-      <FAQSection />
       <CTASection />
+      <FAQSection />
     </main>
   );
 };
