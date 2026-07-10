@@ -23,53 +23,67 @@ import {
   Settings2,
   ArrowUpRight,
   Award,
+  Menu,
+  X,
 } from "lucide-react";
 import ProntofyLogo from "@/components/ProntofyLogo";
-import secretariaImage from "@/assets/secretaria_de_ia.png";
+import secretariaImage from "@/assets/optimized/secretaria-de-ia-lite.jpg";
 import estetoAnimatedVideo from "@/assets/esteto-animado.mp4";
-import agendaImage from "@/assets/agenda-ia.png";
-import automacoesImage from "@/assets/automacoes.png";
-import simplificarImage from "@/assets/simplificar.png";
-import antesDepoisImage from "@/assets/antes-depois-2.png";
-import antesImage from "@/assets/antes.png";
-import depoisImage from "@/assets/depois.png";
-import consultorioImage from "@/assets/consultorio.png";
+import agendaImage from "@/assets/optimized/agenda-ia-lite.jpg";
+import automacoesImage from "@/assets/optimized/automacoes-lite.jpg";
+import simplificarImage from "@/assets/optimized/simplificar-lite.jpg";
+import antesDepoisImage from "@/assets/optimized/antes-depois-2-lite.jpg";
+import antesImage from "@/assets/optimized/antes-lite.jpg";
+import depoisImage from "@/assets/optimized/depois-lite.jpg";
+import consultorioImage from "@/assets/optimized/consultorio-lite.jpg";
+import dispositivosImage from "@/assets/Dispositivos.png";
 
 const WHATSAPP_URL = "https://wa.me/message/YO6R73FVJZHTC1";
 const CONFIG_URL = "/configuracao-secretaria-ia";
+const INFRASTRUCTURE_NOTE =
+  "* Valores referentes ao desenvolvimento/licenciamento do agente. Custos de hospedagem, APIs (OpenAI, WhatsApp, etc.), banco de dados, servidores e demais serviços de infraestrutura são de responsabilidade do cliente. Consulte os Termos de Uso para detalhes.";
 
 const products = [
   {
     name: "Simple Model",
+    price: "R$ 249,90",
+    purchaseNote: "Compra única. Agente sujeito às condições dos termos de uso.",
     eyebrow: "Entrada inteligente",
     idealFor: "Para consultórios que querem começar sem complexidade.",
     description: "Uma secretária virtual no WhatsApp para responder, filtrar pacientes e organizar as primeiras conversas pelo WhatsApp.",
     icon: Bot,
-    tone: "border-slate-800 bg-slate-900/40 hover:border-slate-700/60",
+    tone: "border-slate-200 bg-white shadow-[0_18px_45px_rgba(15,23,42,0.08)] hover:border-slate-300",
     highlights: ["Respostas para dúvidas frequentes", "Triagem inicial de pacientes", "Organização de solicitações básicas"],
+    comparisonFeatures: ["Primeiro atendimento pelo WhatsApp"],
     cta: "Começar pelo Simple",
     href: CONFIG_URL,
   },
   {
     name: "HF1",
+    price: "R$ 1.200,00",
+    purchaseNote: "Compra única. Agente sujeito às condições dos termos de uso.",
     eyebrow: "Modelo recomendado",
     idealFor: "Para clínicas que precisam de uma IA mais integrada à rotina.",
-    description: "Um modelo robusto de secretária virtual para WhatsApp, com mais contexto, integração à plataforma e resolução inteligente de demandas pelo WhatsApp.",
+    description: "Um modelo robusto de secretária virtual para WhatsApp, conectado à plataforma Prontofy para ajudar a cuidar de agendamentos, pagamentos e receita da clínica.",
     icon: Sparkles,
-    tone: "border-emerald-500/40 bg-gradient-to-b from-emerald-950/20 to-slate-950/90 shadow-[0_0_40px_-8px_rgba(16,185,129,0.18)]",
-    highlights: ["Integração com a plataforma", "Resolução inteligente de problemas", "Manutenção incluída por 2 meses"],
+    tone: "border-emerald-500 bg-white shadow-[0_24px_70px_rgba(16,185,129,0.22)] ring-1 ring-emerald-500/20",
+    highlights: ["Agenda, pagamentos e receita acompanhados pela IA", "Resolução inteligente de problemas", "Manutenção incluída por 2 meses"],
+    comparisonFeatures: ["Primeiro atendimento pelo WhatsApp", "Integração direta com a agenda da clínica", "Manutenção incluída por 2 meses"],
     cta: "Quero conhecer o HF1",
     href: CONFIG_URL,
     featured: true,
   },
   {
     name: "HF2",
+    price: "R$ 7.499,80",
+    purchaseNote: "Compra única. Inclui 1 mês de Plano Gold Enterprise.",
     eyebrow: "Premium Enterprise",
     idealFor: "Para operações que querem IA, gestão e automação financeira.",
-    description: "A secretária virtual premium no WhatsApp, preparada para fluxos enterprise, gestão financeira e demandas avançadas que chegam pelo WhatsApp.",
+    description: "Uma secretária virtual exclusiva, nosso modelo premium para clínicas mais sofisticadas. Ela organiza o atendimento, apoia agendamentos, é capaz de pagar contas, acompanha demandas financeiras e conta com suporte dedicado para manter a operação da clínica mais inteligente.",
     icon: Building2,
-    tone: "border-[#D9B85F]/30 bg-gradient-to-b from-[#D9B85F]/10 to-slate-950/90 shadow-[0_0_40px_-8px_rgba(217,184,95,0.12)]",
+    tone: "border-[#D9B85F]/70 bg-white shadow-[0_24px_70px_rgba(217,184,95,0.18)]",
     highlights: ["Tudo dos modelos anteriores", "Plano enterprise", "Pagamentos de contas e gerenciamento financeiro"],
+    comparisonFeatures: ["Primeiro atendimento pelo WhatsApp", "Integração direta com a agenda da clínica", "Manutenção incluída por 2 meses", "Plano enterprise customizado", "Automação financeira e pagamento de contas"],
     cta: "Falar sobre HF2",
     href: WHATSAPP_URL,
     premium: true,
@@ -160,6 +174,7 @@ const SecretariaVirtual = () => {
 
   // FAQ
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   const totalLostRevenue = lostCalls * consultationValue;
   const recoveredRevenue = Math.round(lostCalls * consultationValue * 0.75); // 75% recuperados
@@ -273,49 +288,89 @@ const SecretariaVirtual = () => {
   }, []);
 
   return (
-    <main className="min-h-screen overflow-hidden bg-[#03060a] text-slate-100 selection:bg-emerald-500/30">
+    <main className="relative min-h-screen overflow-x-hidden bg-[#03060a] text-slate-100 selection:bg-emerald-500/30">
+      <a
+        href={WHATSAPP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Falar no WhatsApp"
+        className="fixed bottom-4 left-4 z-[60] grid h-[52px] w-[52px] place-items-center rounded-full border border-emerald-400/25 bg-emerald-500 text-slate-950 shadow-[0_18px_45px_rgba(16,185,129,0.35)] transition hover:scale-105 hover:bg-emerald-400 sm:bottom-6 sm:left-6 sm:h-14 sm:w-14"
+      >
+        <MessageCircle className="h-6 w-6 stroke-[2.5]" />
+      </a>
+
       
       {/* BACKGROUND GLOWS */}
-      <div className="absolute top-0 left-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-emerald-500/10 blur-[120px]" />
-      <div className="absolute top-[20%] right-10 -z-10 h-[600px] w-[600px] rounded-full bg-blue-500/5 blur-[150px]" />
-      <div className="absolute bottom-[30%] left-10 -z-10 h-[700px] w-[700px] rounded-full bg-[#D9B85F]/5 blur-[160px]" />
+      <div className="absolute top-0 left-1/4 -z-10 hidden h-[500px] w-[500px] rounded-full bg-emerald-500/10 blur-[120px] lg:block" />
+      <div className="absolute top-[20%] right-10 -z-10 hidden h-[600px] w-[600px] rounded-full bg-blue-500/5 blur-[150px] lg:block" />
+      <div className="absolute bottom-[30%] left-10 -z-10 hidden h-[700px] w-[700px] rounded-full bg-[#D9B85F]/5 blur-[160px] lg:block" />
 
       {/* HEADER */}
-      <header className="border-b border-slate-900 bg-slate-950/40 backdrop-blur-md sticky top-0 z-50">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-slate-900 bg-slate-950/80 backdrop-blur-md md:sticky">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:h-20 sm:px-6 lg:px-8">
           <ProntofyLogo iconClassName="h-8 w-8 sm:h-10 sm:w-10 text-emerald-400" textClassName="text-xs font-light sm:text-base text-white" />
-          <div className="flex items-center gap-2 sm:gap-4">
-            <a href="#modelos" className="text-sm font-medium text-slate-400 hover:text-white transition hidden md:block">
+          <nav className="hidden items-center gap-4 md:flex">
+            <a href="#modelos" className="text-sm font-medium text-slate-400 transition hover:text-white">
               Modelos
             </a>
-            <a href="#roi" className="text-sm font-medium text-slate-400 hover:text-white transition hidden md:block">
+            <a href="#roi" className="text-sm font-medium text-slate-400 transition hover:text-white">
               Calculadora
             </a>
-            <a href="#antes-depois" className="text-sm font-medium text-slate-400 hover:text-white transition hidden md:block">
+            <a href="#antes-depois" className="text-sm font-medium text-slate-400 transition hover:text-white">
               Antes & Depois
             </a>
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-full border border-slate-800 bg-slate-900/60 px-3 py-2 text-[11px] font-bold text-slate-200 backdrop-blur transition hover:border-emerald-500/30 hover:bg-slate-900 sm:px-5 sm:text-xs"
-            >
-              <MessageCircle className="h-4 w-4 text-emerald-400" />
-              Falar no WhatsApp
-            </a>
-          </div>
+          </nav>
+          <button
+            type="button"
+            aria-label={isMobileNavOpen ? "Fechar navegação" : "Abrir navegação"}
+            aria-expanded={isMobileNavOpen}
+            onClick={() => setIsMobileNavOpen((current) => !current)}
+            className="grid h-10 w-10 place-items-center rounded-xl border border-slate-800 bg-slate-900/60 text-slate-200 transition hover:border-emerald-500/30 hover:text-white md:hidden"
+          >
+            {isMobileNavOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
+        {isMobileNavOpen && (
+          <nav className="border-t border-slate-900 bg-slate-950/95 px-4 py-3 shadow-2xl backdrop-blur-md md:hidden">
+            <div className="mx-auto grid max-w-7xl gap-2">
+              <a
+                href="#modelos"
+                onClick={() => setIsMobileNavOpen(false)}
+                className="rounded-xl px-3 py-3 text-sm font-bold text-slate-200 transition hover:bg-slate-900/70 hover:text-white"
+              >
+                Modelos
+              </a>
+              <a
+                href="#roi"
+                onClick={() => setIsMobileNavOpen(false)}
+                className="rounded-xl px-3 py-3 text-sm font-bold text-slate-200 transition hover:bg-slate-900/70 hover:text-white"
+              >
+                Calculadora
+              </a>
+              <a
+                href="#antes-depois"
+                onClick={() => setIsMobileNavOpen(false)}
+                className="rounded-xl px-3 py-3 text-sm font-bold text-slate-200 transition hover:bg-slate-900/70 hover:text-white"
+              >
+                Antes & Depois
+              </a>
+            </div>
+          </nav>
+        )}
       </header>
+      <div className="h-16 md:hidden" />
 
       {/* HERO SECTION */}
-      <section className="relative overflow-hidden px-4 pb-14 pt-8 sm:px-6 sm:pb-20 sm:pt-10 lg:px-8 lg:pt-16 lg:pb-28">
+      <section className="relative overflow-hidden px-4 pb-12 pt-8 sm:px-6 sm:pb-16 sm:pt-10 lg:px-8 lg:pb-20 lg:pt-14">
         <div className="absolute inset-0 z-0">
           <video
             src={estetoAnimatedVideo}
+            poster={secretariaImage}
             className="h-full w-full object-cover object-center opacity-70"
             autoPlay
             muted
             loop
+            preload="metadata"
             playsInline
             aria-hidden="true"
           />
@@ -323,11 +378,11 @@ const SecretariaVirtual = () => {
           <div className="absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(180deg,rgba(3,6,10,0)_0%,#03060a_100%)]" />
         </div>
         <div className="relative z-10 mx-auto max-w-7xl">
-          <div className="grid gap-10 sm:gap-16 lg:grid-cols-12 lg:items-center">
+          <div className="grid gap-8 sm:gap-12 lg:grid-cols-12 lg:items-center">
             
             {/* Texto Hero */}
             <div className="space-y-6 lg:col-span-7 lg:space-y-8">
-              <h1 className="text-[2.35rem] font-extrabold leading-[1.06] tracking-tight text-white sm:text-5xl lg:text-6xl">
+              <h1 className="text-[2.35rem] font-extrabold leading-[1.06] tracking-tight text-white max-[360px]:text-[2.08rem] sm:text-5xl lg:text-6xl">
                 Sua clínica funcionando <span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">24h por dia.</span> Sua agenda cheia.
               </h1>
               
@@ -459,7 +514,7 @@ const SecretariaVirtual = () => {
               </div>
 
               {/* Badges Flutuantes CSS */}
-              <div className="absolute -left-12 top-1/4 rounded-2xl border border-slate-800 bg-slate-950/90 p-3 shadow-xl backdrop-blur-md hidden sm:flex items-center gap-3 max-w-[190px]">
+              <div className="absolute -left-12 top-1/4 hidden max-w-[190px] items-center gap-3 rounded-2xl border border-slate-800 bg-slate-950/90 p-3 shadow-xl backdrop-blur-md lg:flex">
                 <div className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-500/10 text-emerald-400">
                   <Calendar className="h-5 w-5" />
                 </div>
@@ -469,7 +524,7 @@ const SecretariaVirtual = () => {
                 </div>
               </div>
 
-              <div className="absolute -right-12 bottom-1/4 rounded-2xl border border-slate-800 bg-slate-950/90 p-3 shadow-xl backdrop-blur-md hidden sm:flex items-center gap-3 max-w-[190px]">
+              <div className="absolute -right-12 bottom-1/4 hidden max-w-[190px] items-center gap-3 rounded-2xl border border-slate-800 bg-slate-950/90 p-3 shadow-xl backdrop-blur-md lg:flex">
                 <div className="grid h-10 w-10 place-items-center rounded-xl bg-emerald-500/10 text-emerald-400 animate-pulse">
                   <Zap className="h-5 w-5" />
                 </div>
@@ -486,16 +541,18 @@ const SecretariaVirtual = () => {
       </section>
 
       {/* SEÇÃO POR QUE TER UMA SECRETÁRIA VIRTUAL */}
-      <section className="reveal-on-scroll relative min-h-[520px] overflow-hidden border-t border-slate-900 bg-slate-950 sm:min-h-[620px]" data-reveal>
+      <section className="reveal-on-scroll relative min-h-[480px] overflow-hidden border-t border-slate-900 bg-slate-950 sm:min-h-[560px]" data-reveal>
         <img
           src={antesDepoisImage}
           alt="Atendimento médico antes e depois da secretária virtual"
+          loading="lazy"
+          decoding="async"
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,#03060a_0%,rgba(3,6,10,0.84)_44%,rgba(3,6,10,0.34)_100%)]" />
         <div className="absolute inset-x-0 bottom-0 h-32 bg-[linear-gradient(180deg,rgba(3,6,10,0)_0%,#03060a_100%)]" />
 
-        <div className="relative z-10 mx-auto flex min-h-[520px] max-w-7xl items-center px-4 py-14 sm:min-h-[620px] sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto flex min-h-[480px] max-w-7xl items-center px-4 py-12 sm:min-h-[560px] sm:px-6 lg:px-8">
           <div className="max-w-2xl space-y-5">
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400">Por que ter uma secretária virtual?</p>
             <h2 className="text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl">
@@ -516,11 +573,11 @@ const SecretariaVirtual = () => {
       </section>
 
       {/* SEÇÃO RECURSOS VISUAIS ( alternating grid ) */}
-      <section className="relative space-y-14 py-14 sm:space-y-36 sm:py-28">
+      <section className="relative py-12 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           
           {/* Headline Seção */}
-          <div className="reveal-on-scroll mx-auto mb-10 max-w-3xl space-y-4 text-center sm:mb-20" data-reveal>
+          <div className="reveal-on-scroll mx-auto mb-8 max-w-3xl space-y-4 text-center sm:mb-14" data-reveal>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400">Era da IA</p>
             <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-4xl">
               Não seja um médico da idade média e entre na era da IA
@@ -530,12 +587,13 @@ const SecretariaVirtual = () => {
             </p>
           </div>
 
+          <div className="grid gap-5 lg:grid-cols-3">
           {/* Feature 1: Agendamento */}
-          <div className="reveal-on-scroll reveal-from-left relative grid min-h-[380px] overflow-hidden rounded-2xl border border-emerald-500/15 bg-slate-950 p-5 shadow-2xl sm:min-h-[520px] sm:rounded-3xl sm:p-8 lg:grid-cols-12 lg:items-center lg:p-10" data-reveal>
-            <img src={agendaImage} alt="" className="absolute inset-0 h-full w-full object-cover opacity-80" />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,#03060a_0%,rgba(3,6,10,0.88)_42%,rgba(3,6,10,0.22)_100%)]" />
-            <div className="absolute inset-x-0 bottom-0 h-32 bg-[linear-gradient(180deg,rgba(3,6,10,0)_0%,#03060a_100%)]" />
-            <div className="relative z-10 space-y-6 lg:col-span-6">
+          <div className="reveal-on-scroll reveal-from-left relative flex min-h-[360px] overflow-hidden rounded-2xl border border-emerald-500/15 bg-slate-950 p-5 shadow-2xl sm:min-h-[430px] sm:rounded-3xl sm:p-6" data-reveal>
+            <img src={agendaImage} alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover opacity-95" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,6,10,0.10)_0%,rgba(3,6,10,0.56)_42%,#03060a_100%)]" />
+            <div className="absolute inset-x-0 bottom-0 h-28 bg-[linear-gradient(180deg,rgba(3,6,10,0)_0%,rgba(3,6,10,0.86)_100%)]" />
+            <div className="relative z-10 mt-auto space-y-5">
               <span className="inline-flex h-12 w-12 place-items-center rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                 <Calendar className="mx-auto h-6 w-6" />
               </span>
@@ -563,11 +621,11 @@ const SecretariaVirtual = () => {
           </div>
 
           {/* Feature 2: Automações de Fluxo (Imagem Esquerda) */}
-          <div className="reveal-on-scroll reveal-from-right reveal-delay-1 relative grid min-h-[380px] overflow-hidden rounded-2xl border border-emerald-500/15 bg-slate-950 p-5 shadow-2xl sm:min-h-[520px] sm:rounded-3xl sm:p-8 lg:grid-cols-12 lg:items-center lg:p-10" data-reveal>
-            <img src={automacoesImage} alt="" className="absolute inset-0 h-full w-full object-cover opacity-80" />
-            <div className="absolute inset-0 bg-[linear-gradient(270deg,#03060a_0%,rgba(3,6,10,0.88)_42%,rgba(3,6,10,0.22)_100%)]" />
-            <div className="absolute inset-x-0 bottom-0 h-32 bg-[linear-gradient(180deg,rgba(3,6,10,0)_0%,#03060a_100%)]" />
-            <div className="relative z-10 space-y-6 lg:col-span-6 lg:col-start-7">
+          <div className="reveal-on-scroll reveal-from-right reveal-delay-1 relative flex min-h-[360px] overflow-hidden rounded-2xl border border-emerald-500/15 bg-slate-950 p-5 shadow-2xl sm:min-h-[430px] sm:rounded-3xl sm:p-6" data-reveal>
+            <img src={automacoesImage} alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover opacity-95" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,6,10,0.10)_0%,rgba(3,6,10,0.56)_42%,#03060a_100%)]" />
+            <div className="absolute inset-x-0 bottom-0 h-28 bg-[linear-gradient(180deg,rgba(3,6,10,0)_0%,rgba(3,6,10,0.86)_100%)]" />
+            <div className="relative z-10 mt-auto space-y-5">
               <span className="inline-flex h-12 w-12 place-items-center rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                 <Workflow className="mx-auto h-6 w-6" />
               </span>
@@ -595,11 +653,11 @@ const SecretariaVirtual = () => {
           </div>
 
           {/* Feature 3: Atendimento 24/7 */}
-          <div className="reveal-on-scroll reveal-from-left reveal-delay-2 relative grid min-h-[380px] overflow-hidden rounded-2xl border border-emerald-500/15 bg-slate-950 p-5 shadow-2xl sm:min-h-[520px] sm:rounded-3xl sm:p-8 lg:grid-cols-12 lg:items-center lg:p-10" data-reveal>
-            <img src={simplificarImage} alt="" className="absolute inset-0 h-full w-full object-cover opacity-80" />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,#03060a_0%,rgba(3,6,10,0.88)_42%,rgba(3,6,10,0.22)_100%)]" />
-            <div className="absolute inset-x-0 bottom-0 h-32 bg-[linear-gradient(180deg,rgba(3,6,10,0)_0%,#03060a_100%)]" />
-            <div className="relative z-10 space-y-6 lg:col-span-6">
+          <div className="reveal-on-scroll reveal-from-left reveal-delay-2 relative flex min-h-[360px] overflow-hidden rounded-2xl border border-emerald-500/15 bg-slate-950 p-5 shadow-2xl sm:min-h-[430px] sm:rounded-3xl sm:p-6" data-reveal>
+            <img src={simplificarImage} alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover opacity-95" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,6,10,0.10)_0%,rgba(3,6,10,0.56)_42%,#03060a_100%)]" />
+            <div className="absolute inset-x-0 bottom-0 h-28 bg-[linear-gradient(180deg,rgba(3,6,10,0)_0%,rgba(3,6,10,0.86)_100%)]" />
+            <div className="relative z-10 mt-auto space-y-5">
               <span className="inline-flex h-12 w-12 place-items-center rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                 <ShieldCheck className="mx-auto h-6 w-6" />
               </span>
@@ -625,15 +683,44 @@ const SecretariaVirtual = () => {
               </div>
             </div>
           </div>
+          </div>
 
         </div>
       </section>
 
+      {/* TRANSIÇÃO COM DISPOSITIVOS */}
+      <section className="reveal-on-scroll relative overflow-hidden border-y border-slate-900 bg-[#03060a]" data-reveal>
+        <div className="absolute inset-x-0 bottom-0 h-[44%] bg-white" />
+        <div className="absolute inset-x-0 top-0 h-32 bg-[radial-gradient(circle_at_50%_0%,rgba(16,185,129,0.18),rgba(3,6,10,0)_58%)]" />
+        <div className="relative mx-auto max-w-7xl px-4 pt-8 sm:px-6 sm:pt-12 lg:px-8">
+          <div className="mx-auto max-w-5xl">
+            <img
+              src={dispositivosImage}
+              alt="Prontofy conectada em notebook e smartphone"
+              loading="lazy"
+              decoding="async"
+              className="relative z-10 mx-auto w-full max-w-4xl drop-shadow-[0_28px_70px_rgba(0,0,0,0.55)]"
+            />
+          </div>
+          <div className="relative z-10 mx-auto max-w-3xl pb-12 pt-5 text-center sm:pb-16 sm:pt-8">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600">
+              Atendimento e gestão conectados
+            </p>
+            <h2 className="mt-3 text-2xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
+              Bem-vindo a uma nova era na Prontofy
+            </h2>
+            <p className="mx-auto mt-3 max-w-2xl text-sm font-medium text-slate-600 sm:text-base">
+              A secretária de IA leva o paciente do WhatsApp para uma rotina com agenda, pagamentos e informações da clínica no mesmo fluxo.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* CALCULADORA DE ROI */}
-      <section id="roi" className="reveal-on-scroll relative border-t border-slate-900 bg-slate-950/30 py-14 sm:py-28" data-reveal>
+      <section id="roi" className="reveal-on-scroll relative border-t border-slate-900 bg-slate-950/30 py-12 sm:py-20" data-reveal>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           
-          <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
+          <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
             
             {/* Esquerda: Sliders e Informações */}
             <div className="lg:col-span-6 space-y-6">
@@ -758,13 +845,13 @@ const SecretariaVirtual = () => {
       </section>
 
       {/* SEÇÃO ANTES VS DEPOIS */}
-      <section id="antes-depois" className="relative py-14 sm:py-28">
+      <section id="antes-depois" className="relative py-12 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           
-          <div className="reveal-on-scroll mx-auto mb-10 max-w-3xl space-y-4 text-center sm:mb-16" data-reveal>
+          <div className="reveal-on-scroll mx-auto mb-8 max-w-3xl space-y-4 text-center sm:mb-12" data-reveal>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400">A Grande Transformação</p>
             <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-4xl">
-              Do operacional pesado para uma rotina inteligente.
+              Veja como sair da rotina pesada e estressante
             </h2>
             <p className="text-slate-400 text-sm sm:text-base">
               Compare as duas realidades de atendimento no consultório médico.
@@ -774,7 +861,7 @@ const SecretariaVirtual = () => {
           <div className="grid gap-8 lg:grid-cols-2">
             
             {/* Antes */}
-            <div className="reveal-on-scroll group relative space-y-5 overflow-hidden rounded-2xl border border-slate-900 bg-slate-950 p-5 transition-all duration-300 hover:border-red-500/20 sm:space-y-6 sm:rounded-3xl sm:p-6" data-reveal>
+            <div className="reveal-on-scroll group relative space-y-5 overflow-hidden rounded-2xl border border-slate-900 bg-slate-950 p-5 pt-10 transition-all duration-300 hover:border-red-500/20 sm:space-y-6 sm:rounded-3xl sm:p-6 sm:pt-6" data-reveal>
               <div className="absolute top-0 right-0 bg-red-500/10 px-4 py-1.5 rounded-bl-2xl text-[10px] font-black uppercase text-red-400 border-l border-b border-red-500/20 tracking-wider">
                 Sem Prontofy IA
               </div>
@@ -784,16 +871,16 @@ const SecretariaVirtual = () => {
               </h3>
               
               <div className="overflow-hidden rounded-xl border border-slate-900 bg-slate-900/30 aspect-[16/10] relative">
-                <img src={antesImage} alt="Antes da IA" className="w-full h-full object-cover grayscale opacity-60" />
+                <img src={antesImage} alt="Antes da IA" loading="lazy" decoding="async" className="w-full h-full object-cover grayscale opacity-60" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
               </div>
 
               <ul className="space-y-3">
                 {[
-                  "Pacientes desistem ao esperar horas por respostas simples",
-                  "Telefone ocupado e dezenas de mensagens acumuladas no WhatsApp",
-                  "Sem suporte à noite, finais de semana ou feriados",
-                  "Recepcionistas sobrecarregadas com agendamentos repetitivos",
+                  "Seus pacientes desistem de esperar por respostas simples e procuram outro médico",
+                  "Seu WhatsApp fica cheio, o telefone toca sem parar e oportunidades se perdem",
+                  "Sua clínica fica sem resposta à noite, nos finais de semana e feriados",
+                  "Seu time perde energia todos os dias com agendamentos repetitivos",
                 ].map((item) => (
                   <li key={item} className="flex gap-3 text-xs font-bold text-slate-400 leading-normal">
                     <span className="text-red-400 shrink-0 font-extrabold">✕</span>
@@ -804,7 +891,7 @@ const SecretariaVirtual = () => {
             </div>
 
             {/* Depois */}
-            <div className="reveal-on-scroll reveal-delay-1 group relative space-y-5 overflow-hidden rounded-2xl border border-emerald-500/20 bg-slate-950 p-5 shadow-[0_0_50px_-15px_rgba(16,185,129,0.15)] transition-all duration-300 hover:border-emerald-500/40 sm:space-y-6 sm:rounded-3xl sm:p-6" data-reveal>
+            <div className="reveal-on-scroll reveal-delay-1 group relative space-y-5 overflow-hidden rounded-2xl border border-emerald-500/20 bg-slate-950 p-5 pt-10 shadow-[0_0_50px_-15px_rgba(16,185,129,0.15)] transition-all duration-300 hover:border-emerald-500/40 sm:space-y-6 sm:rounded-3xl sm:p-6 sm:pt-6" data-reveal>
               <div className="absolute top-0 right-0 bg-emerald-500/10 px-4 py-1.5 rounded-bl-2xl text-[10px] font-black uppercase text-emerald-400 border-l border-b border-emerald-500/20 tracking-wider">
                 Com Prontofy IA
               </div>
@@ -814,16 +901,16 @@ const SecretariaVirtual = () => {
               </h3>
               
               <div className="overflow-hidden rounded-xl border border-emerald-500/10 bg-slate-900/30 aspect-[16/10] relative">
-                <img src={depoisImage} alt="Depois da IA" className="w-full h-full object-cover" />
+                <img src={depoisImage} alt="Depois da IA" loading="lazy" decoding="async" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
               </div>
 
               <ul className="space-y-3">
                 {[
-                  "Atendimento em menos de 5 segundos, 24 horas por dia",
-                  "Agendamento automático integrado ao prontuário eletrônico",
-                  "Resolução inteligente de dúvidas sobre localização e exames",
-                  "Time humano focado no atendimento presencial de qualidade",
+                  "Seus pacientes recebem resposta em segundos, mesmo fora do horário",
+                  "Sua agenda é preenchida automaticamente direto no prontuário",
+                  "Sua IA resolve dúvidas sobre localização, exames e preparo sem acionar o time",
+                  "Sua equipe fica livre para cuidar melhor de quem está dentro da clínica",
                 ].map((item) => (
                   <li key={item} className="flex gap-3 text-xs font-bold text-slate-200 leading-normal">
                     <span className="text-emerald-400 shrink-0 font-extrabold">✓</span>
@@ -839,17 +926,17 @@ const SecretariaVirtual = () => {
       </section>
 
       {/* SEÇÃO MODELOS */}
-      <section id="modelos" className="relative border-t border-slate-900 bg-slate-950/20 px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
+      <section id="modelos" className="relative border-t border-slate-200 bg-white px-4 py-12 text-slate-950 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <div className="mx-auto max-w-7xl">
-          <div className="reveal-on-scroll mb-10 grid gap-6 sm:mb-16 lg:grid-cols-12 lg:items-end" data-reveal>
-            <div className="lg:col-span-7 space-y-4">
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400">Escolha Seu Modelo</p>
-              <h2 className="text-2xl font-extrabold leading-tight text-white sm:text-5xl">
+          <div className="reveal-on-scroll mx-auto mb-8 max-w-4xl space-y-4 text-center sm:mb-12" data-reveal>
+            <div className="space-y-4">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600">Escolha Seu Modelo</p>
+              <h2 className="text-2xl font-extrabold leading-tight text-slate-950 sm:text-5xl">
                 Três modelos de secretária. Um caminho para automatizar.
               </h2>
             </div>
-            <div className="lg:col-span-5">
-              <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+            <div>
+              <p className="mx-auto max-w-2xl text-xs leading-relaxed text-slate-600 sm:text-sm">
                 O Simple resolve o começo da jornada. O HF1 traz a inteligência integrada à agenda médica. O HF2 eleva a operação para um nível de automação financeira e enterprise.
               </p>
             </div>
@@ -862,33 +949,33 @@ const SecretariaVirtual = () => {
               return (
                 <article
                   key={product.name}
-                  className={`reveal-on-scroll relative flex flex-col justify-between gap-6 overflow-hidden rounded-2xl border p-5 backdrop-blur-xl transition duration-300 hover:scale-[1.01] sm:gap-8 sm:rounded-3xl sm:p-6 ${product.tone}`}
+                  className={`reveal-on-scroll relative flex flex-col overflow-hidden rounded-2xl border p-5 transition duration-300 hover:-translate-y-1 sm:rounded-3xl sm:p-6 ${product.tone}`}
                   data-reveal
                 >
-                    <div className="space-y-5 sm:space-y-6">
-                    <div className="flex justify-between items-start">
+                  <div className="flex min-h-full flex-col">
+                    <div className="mb-5 flex items-start justify-between gap-3">
                       <span className={`grid h-12 w-12 place-items-center rounded-2xl border ${
                         product.featured 
                           ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400" 
                           : product.premium 
                           ? "bg-[#D9B85F]/10 border-[#D9B85F]/20 text-[#D9B85F]" 
-                          : "bg-slate-950 border-slate-800 text-slate-400"
+                          : "bg-slate-50 border-slate-200 text-slate-500"
                       }`}>
                         <Icon className="h-6 w-6" />
                       </span>
-                      {product.featured && (
-                        <span className="rounded-full bg-emerald-500 px-3 py-1 text-[9px] font-black uppercase tracking-wider text-[#04110b]">
-                          RECOMENDADO
-                        </span>
-                      )}
-                      {product.premium && (
-                        <span className="rounded-full bg-[#D9B85F] px-3 py-1 text-[9px] font-black uppercase tracking-wider text-[#120f08]">
-                          ENTERPRISE
-                        </span>
-                      )}
+                      <span className={`rounded-full px-3 py-1 text-[9px] font-black uppercase tracking-wider ${
+                        product.featured
+                          ? "bg-emerald-500 text-[#04110b]"
+                          : product.premium
+                          ? "bg-[#D9B85F] text-[#120f08]"
+                          : "border border-slate-200 bg-slate-50 text-slate-500"
+                      }`}>
+                        {product.featured ? "Recomendado" : product.premium ? "Enterprise" : "Compra única"}
+                      </span>
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="flex flex-col gap-3">
+                      <div className="min-h-[124px] space-y-3 sm:min-h-[140px]">
                       <p className={`text-[10px] font-bold uppercase tracking-widest ${
                         product.featured 
                           ? "text-emerald-400" 
@@ -898,18 +985,44 @@ const SecretariaVirtual = () => {
                       }`}>
                         {product.eyebrow}
                       </p>
-                      <h3 className="text-2xl font-black text-white sm:text-3xl">{product.name}</h3>
-                      <p className="text-xs font-bold text-slate-300">{product.idealFor}</p>
+                      <h3 className="text-2xl font-black text-slate-950 sm:text-3xl">{product.name}</h3>
+                      <p className="text-xs font-bold leading-relaxed text-slate-600">{product.idealFor}</p>
+                      </div>
+                      <p className={`order-4 pt-2 text-3xl font-black tracking-tight sm:text-4xl ${
+                        product.featured
+                          ? "text-emerald-500"
+                          : product.premium
+                          ? "text-[#D9B85F]"
+                          : "text-slate-950"
+                      }`}>
+                        {product.price}
+                      </p>
+                      <div className="order-6">
+                        <p className="mb-2 text-[10px] font-black uppercase tracking-[0.16em] text-slate-500">O que faz pela clínica</p>
+                        <p className="text-xs leading-relaxed text-slate-600 sm:text-sm">
+                          {product.description}
+                        </p>
+                      </div>
+                      <a
+                        href={product.href}
+                        className={`order-5 inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg text-xs font-black uppercase tracking-wider transition sm:h-12 ${
+                          product.featured
+                            ? "bg-emerald-500 text-slate-950 hover:bg-emerald-400"
+                            : product.premium
+                            ? "bg-[#D9B85F] text-[#120f08] hover:bg-[#ebd28b]"
+                            : "border border-emerald-500/50 bg-white text-emerald-700 hover:border-emerald-500 hover:bg-emerald-50"
+                        }`}
+                      >
+                        {product.cta}
+                        <ArrowRight className="h-4 w-4" />
+                      </a>
                     </div>
 
-                    <p className="text-slate-400 text-xs sm:text-sm leading-relaxed min-h-[70px]">
-                      {product.description}
-                    </p>
-
-                    <div className="border-t border-slate-900/60 pt-6">
+                    <div className="mt-5 border-t border-slate-200 pt-5">
+                      <p className="mb-3 text-[10px] font-black uppercase tracking-[0.16em] text-slate-500">Inclui</p>
                       <ul className="space-y-3">
                         {product.highlights.map((highlight) => (
-                          <li key={highlight} className="flex gap-3 text-xs font-semibold text-slate-300 leading-normal">
+                          <li key={highlight} className="flex gap-3 text-xs font-semibold text-slate-700 leading-normal">
                             <Check className={`mt-0.5 h-[18px] w-[18px] shrink-0 ${
                               product.featured 
                                 ? "text-emerald-400" 
@@ -920,23 +1033,29 @@ const SecretariaVirtual = () => {
                             {highlight}
                           </li>
                         ))}
+                        {product.comparisonFeatures.map((feature) => (
+                          <li key={feature} className="flex gap-3 text-xs font-semibold text-slate-700 leading-normal">
+                            <Check className={`mt-0.5 h-[18px] w-[18px] shrink-0 ${
+                              product.featured 
+                                ? "text-emerald-400" 
+                                : product.premium 
+                                ? "text-[#D9B85F]" 
+                                : "text-slate-500"
+                            }`} />
+                            {feature}
+                          </li>
+                        ))}
                       </ul>
+                      <div className="mt-5 space-y-2 border-t border-slate-200 pt-4">
+                        <p className="text-[11px] font-semibold leading-relaxed text-slate-500">
+                          {product.purchaseNote}
+                        </p>
+                        <p className="text-[10px] font-medium leading-relaxed text-slate-500">
+                          {INFRASTRUCTURE_NOTE}
+                        </p>
+                      </div>
                     </div>
                   </div>
-
-                  <a
-                    href={product.href}
-                    className={`inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl text-xs font-bold uppercase tracking-wider transition ${
-                      product.featured
-                        ? "bg-emerald-500 text-slate-950 hover:bg-emerald-400"
-                        : product.premium
-                        ? "bg-[#D9B85F] text-[#120f08] hover:bg-[#ebd28b]"
-                        : "border border-slate-800 bg-slate-900/40 text-slate-200 hover:border-slate-700 hover:bg-slate-900/80"
-                    }`}
-                  >
-                    {product.cta}
-                    <ArrowRight className="h-4 w-4" />
-                  </a>
                 </article>
               );
             })}
@@ -945,9 +1064,9 @@ const SecretariaVirtual = () => {
       </section>
 
       {/* COMPARATIVO RÁPIDO */}
-      <section className="reveal-on-scroll border-t border-slate-900 bg-slate-950/40 px-4 py-14 sm:px-6 sm:py-20 lg:px-8" data-reveal>
+      <section className="hidden" aria-hidden="true">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-12 lg:grid-cols-12 lg:items-start">
+          <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
             
             <div className="lg:col-span-5 space-y-4">
               <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#D9B85F]">Comparativo Rápido</p>
@@ -960,14 +1079,14 @@ const SecretariaVirtual = () => {
             </div>
 
             <div className="reveal-on-scroll reveal-delay-1 overflow-hidden rounded-2xl border border-slate-900 bg-slate-950/60 shadow-xl sm:rounded-3xl lg:col-span-7" data-reveal>
-              <div className="grid grid-cols-[1.4fr_0.6fr_0.6fr_0.6fr] border-b border-slate-900 bg-slate-900/20 px-3 py-3 text-[9px] font-black uppercase tracking-wide text-slate-500 sm:grid-cols-[1.5fr_0.7fr_0.7fr_0.7fr] sm:px-6 sm:py-4 sm:text-[10px] sm:tracking-wider">
+              <div className="grid grid-cols-[minmax(0,1fr)_42px_42px_42px] border-b border-slate-900 bg-slate-900/20 px-2 py-3 text-[8px] font-black uppercase tracking-wide text-slate-500 min-[380px]:grid-cols-[minmax(0,1fr)_48px_48px_48px] min-[380px]:px-3 min-[380px]:text-[9px] sm:grid-cols-[1.5fr_0.7fr_0.7fr_0.7fr] sm:px-6 sm:py-4 sm:text-[10px] sm:tracking-wider">
                 <span>Funcionalidade</span>
                 <span className="text-center">Simple</span>
                 <span className="text-center">HF1</span>
                 <span className="text-center">HF2</span>
               </div>
               {comparison.map((row) => (
-                <div key={row.feature} className="grid grid-cols-[1.4fr_0.6fr_0.6fr_0.6fr] items-center border-b border-slate-900/60 px-3 py-3 last:border-b-0 hover:bg-slate-900/10 sm:grid-cols-[1.5fr_0.7fr_0.7fr_0.7fr] sm:px-6 sm:py-4">
+                <div key={row.feature} className="grid grid-cols-[minmax(0,1fr)_42px_42px_42px] items-center border-b border-slate-900/60 px-2 py-3 last:border-b-0 hover:bg-slate-900/10 min-[380px]:grid-cols-[minmax(0,1fr)_48px_48px_48px] min-[380px]:px-3 sm:grid-cols-[1.5fr_0.7fr_0.7fr_0.7fr] sm:px-6 sm:py-4">
                   <p className="pr-2 text-[11px] font-semibold leading-normal text-slate-300 sm:pr-3 sm:text-xs">{row.feature}</p>
                   <CheckMark active={row.simple} />
                   <CheckMark active={row.hf1} />
@@ -981,20 +1100,20 @@ const SecretariaVirtual = () => {
       </section>
 
       {/* SEÇÃO ENTERPRISE HF2 DETALHADO */}
-      <section className="reveal-on-scroll relative min-h-[680px] overflow-hidden border-t border-slate-900 bg-slate-950 px-4 sm:px-6 lg:px-8" data-reveal>
+      <section className="reveal-on-scroll relative min-h-[600px] overflow-hidden border-t border-slate-900 bg-slate-950 px-4 sm:px-6 lg:px-8" data-reveal>
         <div className="absolute inset-0">
-          <img src={consultorioImage} alt="" className="h-full w-full object-cover opacity-80" />
+          <img src={consultorioImage} alt="" loading="lazy" decoding="async" className="h-full w-full object-cover opacity-80" />
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,6,10,0.88)_0%,rgba(3,6,10,0.42)_48%,rgba(3,6,10,0.18)_100%)]" />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,6,10,0.1)_0%,rgba(3,6,10,0.18)_46%,rgba(3,6,10,0.86)_100%)]" />
         </div>
 
-        <div className="relative z-10 mx-auto flex min-h-[680px] max-w-7xl flex-col justify-between py-12 sm:py-16">
+        <div className="relative z-10 mx-auto flex min-h-[600px] max-w-7xl flex-col justify-between py-10 sm:py-14">
           <div className="max-w-2xl space-y-4">
             <div className="inline-flex items-center gap-2 rounded-full border border-[#D9B85F]/25 bg-[#D9B85F]/10 px-4 py-1 text-xs font-semibold text-[#D9B85F] backdrop-blur">
               <Award className="h-3.5 w-3.5" />
               <span>Modelo HF2 Enterprise</span>
             </div>
-            <h2 className="border-l-4 border-[#D9B85F] pl-4 text-3xl font-extrabold leading-tight text-white drop-shadow-[0_10px_30px_rgba(0,0,0,0.45)] sm:text-4xl lg:text-5xl">
+            <h2 className="text-3xl font-extrabold leading-tight text-white drop-shadow-[0_10px_30px_rgba(0,0,0,0.45)] sm:text-4xl lg:text-5xl">
               A secretária para clínicas com demandas complexas de gestão financeira.
             </h2>
             <p className="max-w-lg text-sm leading-relaxed text-slate-300">
@@ -1013,7 +1132,7 @@ const SecretariaVirtual = () => {
                 const Icon = item.icon;
 
                 return (
-              <div key={item.title} className="soft-float flex flex-col items-center text-center text-white drop-shadow-[0_8px_22px_rgba(0,0,0,0.65)]">
+              <div key={item.title} className="flex flex-col items-center text-center text-white drop-shadow-[0_8px_22px_rgba(0,0,0,0.65)]">
                     <span className="grid h-14 w-14 place-items-center text-white">
                       <Icon className="h-9 w-9 stroke-[2.1]" />
                     </span>
@@ -1037,10 +1156,10 @@ const SecretariaVirtual = () => {
       </section>
 
       {/* SEÇÃO FAQ ( Custom Accordions ) */}
-      <section className="relative border-t border-slate-900 bg-slate-950/40 py-14 sm:py-28">
+      <section className="relative border-t border-slate-900 bg-slate-950/40 py-12 sm:py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           
-          <div className="reveal-on-scroll mb-10 space-y-4 text-center sm:mb-16" data-reveal>
+          <div className="reveal-on-scroll mb-8 space-y-4 text-center sm:mb-12" data-reveal>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400">Dúvidas Frequentes</p>
             <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-4xl">
               Perguntas Frequentes sobre a IA
@@ -1082,7 +1201,7 @@ const SecretariaVirtual = () => {
       </section>
 
       {/* CTA FINAL */}
-      <section className="reveal-on-scroll relative border-t border-slate-950 px-4 py-14 text-center sm:px-6 sm:py-20 lg:px-8 lg:py-28" data-reveal>
+      <section className="reveal-on-scroll relative border-t border-slate-950 px-4 py-12 text-center sm:px-6 sm:py-16 lg:px-8 lg:py-20" data-reveal>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,rgba(16,185,129,0.12),transparent_60%)] -z-10" />
         
         <div className="mx-auto max-w-4xl space-y-6 sm:space-y-8">
