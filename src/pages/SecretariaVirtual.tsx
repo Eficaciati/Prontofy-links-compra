@@ -13,6 +13,8 @@ import {
   Zap,
   ChevronDown,
   ChevronUp,
+  ChevronLeft,
+  ChevronRight,
   TrendingUp,
   TrendingDown,
   Coins,
@@ -33,10 +35,12 @@ import agendaImage from "@/assets/optimized/agenda-ia-lite.jpg";
 import automacoesImage from "@/assets/optimized/automacoes-lite.jpg";
 import simplificarImage from "@/assets/optimized/simplificar-lite.jpg";
 import antesDepoisImage from "@/assets/optimized/antes-depois-2-lite.jpg";
-import antesImage from "@/assets/optimized/antes-lite.jpg";
-import depoisImage from "@/assets/optimized/depois-lite.jpg";
+import antesImage from "@/assets/rotina-ruim.png";
+import depoisImage from "@/assets/rotina-boa.png";
 import consultorioImage from "@/assets/optimized/consultorio-lite.jpg";
 import dispositivosImage from "@/assets/Dispositivos.png";
+import whatsappLogo from "@/assets/whatsapp-logo.png";
+import footerLogoImage from "@/assets/Imagem-title-2.png";
 
 const WHATSAPP_URL = "https://wa.me/message/YO6R73FVJZHTC1";
 const CONFIG_URL = "/configuracao-secretaria-ia";
@@ -94,6 +98,30 @@ const heroStats = [
   { label: "Atendimento Ativo", value: "24/7", desc: "Sem pausas ou feriados" },
   { label: "Tempo de Resposta", value: "< 5s", desc: "Instantâneo para o paciente" },
   { label: "Consultas Salvas", value: "+30%", desc: "Média de aumento na agenda" },
+];
+
+const aiExperienceCards = [
+  {
+    title: "Agenda sem confusão.",
+    description: "A IA organiza horários, confirma intenções e reduz conversas perdidas antes que virem buraco na agenda.",
+    image: agendaImage,
+    icon: Calendar,
+    bullets: ["Horários organizados em tempo real", "Menos mensagens perdidas"],
+  },
+  {
+    title: "Triagem inteligente.",
+    description: "O paciente entra no fluxo certo com perguntas simples, contexto organizado e menos interrupções para sua equipe.",
+    image: automacoesImage,
+    icon: Workflow,
+    bullets: ["Perguntas certas antes da consulta", "Paciente no fluxo correto"],
+  },
+  {
+    title: "Atendimento 24 horas.",
+    description: "Mesmo fora do horário comercial, a clínica responde, orienta e mantém o paciente perto da sua agenda.",
+    image: simplificarImage,
+    icon: ShieldCheck,
+    bullets: ["Respostas mesmo fora do horário", "Equipe livre do repetitivo"],
+  },
 ];
 
 const comparison = [
@@ -175,10 +203,21 @@ const SecretariaVirtual = () => {
   // FAQ
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const [activeAiCard, setActiveAiCard] = useState(0);
 
   const totalLostRevenue = lostCalls * consultationValue;
   const recoveredRevenue = Math.round(lostCalls * consultationValue * 0.75); // 75% recuperados
   const yearlySavings = recoveredRevenue * 12;
+  const activeAiExperience = aiExperienceCards[activeAiCard];
+  const ActiveAiIcon = activeAiExperience.icon;
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setActiveAiCard((current) => (current + 1) % aiExperienceCards.length);
+    }, 5200);
+
+    return () => window.clearInterval(interval);
+  }, []);
 
   // Efeito para digitar as mensagens do chat virtual
   useEffect(() => {
@@ -294,9 +333,9 @@ const SecretariaVirtual = () => {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Falar no WhatsApp"
-        className="fixed bottom-4 left-4 z-[60] grid h-[52px] w-[52px] place-items-center rounded-full border border-emerald-400/25 bg-emerald-500 text-slate-950 shadow-[0_18px_45px_rgba(16,185,129,0.35)] transition hover:scale-105 hover:bg-emerald-400 sm:bottom-6 sm:left-6 sm:h-14 sm:w-14"
+        className="fixed bottom-4 right-4 z-[60] grid h-[52px] w-[52px] place-items-center rounded-full border border-emerald-500/20 bg-white shadow-[0_18px_45px_rgba(0,0,0,0.22)] transition hover:scale-105 sm:bottom-6 sm:right-6 sm:h-14 sm:w-14"
       >
-        <MessageCircle className="h-6 w-6 stroke-[2.5]" />
+        <img src={whatsappLogo} alt="" className="h-10 w-10 object-contain sm:h-11 sm:w-11" />
       </a>
 
       
@@ -312,9 +351,6 @@ const SecretariaVirtual = () => {
           <nav className="hidden items-center gap-4 md:flex">
             <a href="#modelos" className="text-sm font-medium text-slate-400 transition hover:text-white">
               Modelos
-            </a>
-            <a href="#roi" className="text-sm font-medium text-slate-400 transition hover:text-white">
-              Calculadora
             </a>
             <a href="#antes-depois" className="text-sm font-medium text-slate-400 transition hover:text-white">
               Antes & Depois
@@ -339,13 +375,6 @@ const SecretariaVirtual = () => {
                 className="rounded-xl px-3 py-3 text-sm font-bold text-slate-200 transition hover:bg-slate-900/70 hover:text-white"
               >
                 Modelos
-              </a>
-              <a
-                href="#roi"
-                onClick={() => setIsMobileNavOpen(false)}
-                className="rounded-xl px-3 py-3 text-sm font-bold text-slate-200 transition hover:bg-slate-900/70 hover:text-white"
-              >
-                Calculadora
               </a>
               <a
                 href="#antes-depois"
@@ -407,7 +436,7 @@ const SecretariaVirtual = () => {
               </div>
 
               {/* Stats Pills */}
-              <div className="grid grid-cols-3 gap-2 border-t border-slate-900 pt-5 sm:gap-4 sm:pt-6">
+              <div className="grid grid-cols-3 gap-2 pt-5 sm:gap-4 sm:pt-6">
                 {heroStats.map((item) => (
                   <div key={item.label} className="group relative overflow-hidden rounded-xl border border-slate-900 bg-slate-950/60 p-3 transition duration-300 hover:border-slate-800 sm:rounded-2xl sm:p-4">
                     <p className="text-xl font-black text-white sm:text-3xl">{item.value}</p>
@@ -573,11 +602,11 @@ const SecretariaVirtual = () => {
       </section>
 
       {/* SEÇÃO RECURSOS VISUAIS ( alternating grid ) */}
-      <section className="relative py-12 sm:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="relative py-10 sm:py-20">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           
           {/* Headline Seção */}
-          <div className="reveal-on-scroll mx-auto mb-8 max-w-3xl space-y-4 text-center sm:mb-14" data-reveal>
+          <div className="reveal-on-scroll mx-auto mb-7 max-w-3xl space-y-4 text-center sm:mb-14" data-reveal>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400">Era da IA</p>
             <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-4xl">
               Não seja um médico da idade média e entre na era da IA
@@ -587,7 +616,89 @@ const SecretariaVirtual = () => {
             </p>
           </div>
 
-          <div className="grid gap-5 lg:grid-cols-3">
+          <div className="reveal-on-scroll relative overflow-hidden rounded-2xl border border-emerald-500/15 bg-slate-950 shadow-[0_22px_60px_rgba(0,0,0,0.28)] sm:rounded-3xl sm:shadow-[0_30px_90px_rgba(0,0,0,0.34)]" data-reveal>
+            <div className="relative min-h-[430px] sm:min-h-[560px]">
+              <img
+                key={activeAiExperience.title}
+                src={activeAiExperience.image}
+                alt={activeAiExperience.title}
+                loading="lazy"
+                decoding="async"
+                className={`absolute inset-0 h-full w-full object-cover opacity-95 transition duration-700 ${
+                  activeAiExperience.image === agendaImage ? "-translate-x-20 scale-110 sm:translate-x-0 sm:scale-100" : ""
+                }`}
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(90deg,#03060a_0%,rgba(3,6,10,0.78)_40%,rgba(3,6,10,0.2)_100%)]" />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,6,10,0.18)_0%,rgba(3,6,10,0.08)_44%,#03060a_100%)]" />
+
+              <button
+                type="button"
+                aria-label="Ver card anterior"
+                onClick={() => setActiveAiCard((current) => (current - 1 + aiExperienceCards.length) % aiExperienceCards.length)}
+                className="absolute left-3 top-1/2 z-20 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-slate-950/55 text-white backdrop-blur transition hover:border-emerald-400/50 hover:bg-emerald-500/20 sm:left-5 sm:h-12 sm:w-12"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button
+                type="button"
+                aria-label="Ver prÃ³ximo card"
+                onClick={() => setActiveAiCard((current) => (current + 1) % aiExperienceCards.length)}
+                className="absolute right-3 top-1/2 z-20 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-slate-950/55 text-white backdrop-blur transition hover:border-emerald-400/50 hover:bg-emerald-500/20 sm:right-5 sm:h-12 sm:w-12"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+
+              <div className="relative z-10 flex min-h-[430px] items-end px-5 pb-11 pt-20 sm:min-h-[560px] sm:px-10 sm:pb-12 lg:px-16">
+                <div className="max-w-2xl space-y-4 sm:space-y-5">
+                  <span className="inline-flex h-12 w-12 place-items-center rounded-2xl border border-emerald-500/25 bg-emerald-500/10 text-emerald-400 shadow-[0_0_30px_rgba(16,185,129,0.16)]">
+                    <ActiveAiIcon className="mx-auto h-6 w-6" />
+                  </span>
+                  <div className="space-y-3">
+                    <h3 className="text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
+                      {activeAiExperience.title}
+                    </h3>
+                    <p className="max-w-xl text-sm font-medium leading-relaxed text-slate-300 sm:text-base">
+                      {activeAiExperience.description}
+                    </p>
+                  </div>
+                  <ul className="grid gap-3 sm:grid-cols-2">
+                    {activeAiExperience.bullets.map((item) => (
+                      <li key={item} className="flex items-center gap-3 text-xs font-bold text-slate-200">
+                        <CheckCircle2 className="h-[18px] w-[18px] shrink-0 text-emerald-400" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div className="absolute bottom-5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2.5">
+                {aiExperienceCards.map((card, index) => (
+                  <button
+                    key={card.title}
+                    type="button"
+                    aria-label={`Ver ${card.title}`}
+                    onClick={() => setActiveAiCard(index)}
+                    className={`h-2.5 rounded-full transition-all duration-300 ${
+                      activeAiCard === index ? "w-8 bg-emerald-400" : "w-2.5 bg-white/35 hover:bg-white/70"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="reveal-on-scroll mt-6 flex justify-center sm:mt-8" data-reveal>
+            <a
+              href={CONFIG_URL}
+              className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-emerald-500 px-5 text-xs font-bold uppercase tracking-wider text-slate-950 shadow-[0_20px_50px_rgba(16,185,129,0.22)] transition hover:bg-emerald-400 sm:w-auto sm:px-7"
+            >
+              Configurar minha secretária
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+
+          <div className="hidden">
           {/* Feature 1: Agendamento */}
           <div className="reveal-on-scroll reveal-from-left relative flex min-h-[360px] overflow-hidden rounded-2xl border border-emerald-500/15 bg-slate-950 p-5 shadow-2xl sm:min-h-[430px] sm:rounded-3xl sm:p-6" data-reveal>
             <img src={agendaImage} alt="" loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover opacity-95" />
@@ -690,26 +801,25 @@ const SecretariaVirtual = () => {
 
       {/* TRANSIÇÃO COM DISPOSITIVOS */}
       <section className="reveal-on-scroll relative overflow-hidden border-y border-slate-900 bg-[#03060a]" data-reveal>
-        <div className="absolute inset-x-0 bottom-0 h-[44%] bg-white" />
-        <div className="absolute inset-x-0 top-0 h-32 bg-[radial-gradient(circle_at_50%_0%,rgba(16,185,129,0.18),rgba(3,6,10,0)_58%)]" />
-        <div className="relative mx-auto max-w-7xl px-4 pt-8 sm:px-6 sm:pt-12 lg:px-8">
-          <div className="mx-auto max-w-5xl">
+        <div className="absolute inset-x-0 bottom-0 h-[52%] bg-white sm:h-[52%]" />
+        <div className="relative mx-auto max-w-7xl px-5 pt-10 sm:px-6 sm:pt-14 lg:px-8">
+          <div className="mx-auto -mb-10 max-w-[680px] sm:-mb-16 sm:max-w-5xl lg:-mb-24">
             <img
               src={dispositivosImage}
               alt="Prontofy conectada em notebook e smartphone"
               loading="lazy"
               decoding="async"
-              className="relative z-10 mx-auto w-full max-w-4xl drop-shadow-[0_28px_70px_rgba(0,0,0,0.55)]"
+              className="relative z-10 mx-auto w-full max-w-[680px] translate-y-4 drop-shadow-[0_10px_18px_rgba(0,0,0,0.38)] sm:max-w-4xl sm:translate-y-0"
             />
           </div>
-          <div className="relative z-10 mx-auto max-w-3xl pb-12 pt-5 text-center sm:pb-16 sm:pt-8">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600">
+          <div className="relative z-10 mx-auto max-w-3xl pb-14 pt-16 text-center sm:pb-16 sm:pt-24">
+            <p className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-emerald-600 sm:text-xs sm:tracking-[0.2em]">
               Atendimento e gestão conectados
             </p>
-            <h2 className="mt-3 text-2xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
+            <h2 className="mx-auto mt-3 max-w-[21rem] text-[1.55rem] font-extrabold leading-[1.08] tracking-tight text-slate-950 sm:max-w-none sm:text-4xl">
               Bem-vindo a uma nova era na Prontofy
             </h2>
-            <p className="mx-auto mt-3 max-w-2xl text-sm font-medium text-slate-600 sm:text-base">
+            <p className="mx-auto mt-4 max-w-[20rem] text-[13px] font-medium leading-relaxed text-slate-600 sm:max-w-2xl sm:text-base">
               A secretária de IA leva o paciente do WhatsApp para uma rotina com agenda, pagamentos e informações da clínica no mesmo fluxo.
             </p>
           </div>
@@ -717,7 +827,7 @@ const SecretariaVirtual = () => {
       </section>
 
       {/* CALCULADORA DE ROI */}
-      <section id="roi" className="reveal-on-scroll relative border-t border-slate-900 bg-slate-950/30 py-12 sm:py-20" data-reveal>
+      <section id="roi" className="hidden" aria-hidden="true">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           
           <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
@@ -846,14 +956,14 @@ const SecretariaVirtual = () => {
 
       {/* SEÇÃO ANTES VS DEPOIS */}
       <section id="antes-depois" className="relative py-12 sm:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
           
-          <div className="reveal-on-scroll mx-auto mb-8 max-w-3xl space-y-4 text-center sm:mb-12" data-reveal>
+          <div className="reveal-on-scroll mx-auto mb-9 max-w-3xl space-y-4 text-center sm:mb-12" data-reveal>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-400">A Grande Transformação</p>
-            <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-4xl">
+            <h2 className="mx-auto max-w-[21rem] text-[1.65rem] font-extrabold leading-[1.08] tracking-tight text-white sm:max-w-none sm:text-4xl">
               Veja como sair da rotina pesada e estressante
             </h2>
-            <p className="text-slate-400 text-sm sm:text-base">
+            <p className="mx-auto max-w-[20rem] text-[13px] leading-relaxed text-slate-400 sm:max-w-none sm:text-base">
               Compare as duas realidades de atendimento no consultório médico.
             </p>
           </div>
@@ -1201,14 +1311,14 @@ const SecretariaVirtual = () => {
       </section>
 
       {/* CTA FINAL */}
-      <section className="reveal-on-scroll relative border-t border-slate-950 px-4 py-12 text-center sm:px-6 sm:py-16 lg:px-8 lg:py-20" data-reveal>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,rgba(16,185,129,0.12),transparent_60%)] -z-10" />
+      <section className="reveal-on-scroll relative border-t border-slate-200 bg-white px-4 pb-12 pt-[clamp(5rem,18vw,6.5rem)] text-center sm:px-6 sm:py-16 lg:px-8 lg:py-20" data-reveal>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,rgba(16,185,129,0.12),transparent_58%)]" />
         
-        <div className="mx-auto max-w-4xl space-y-6 sm:space-y-8">
-          <h2 className="text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl">
+        <div className="relative mx-auto max-w-4xl space-y-6 sm:space-y-8">
+          <h2 className="text-3xl font-extrabold leading-tight tracking-tight text-slate-950 sm:text-5xl">
             Chega de perder pacientes para a demora de resposta.
           </h2>
-          <p className="max-w-2xl mx-auto text-slate-400 text-sm sm:text-base leading-relaxed">
+          <p className="max-w-2xl mx-auto text-slate-600 text-sm sm:text-base leading-relaxed">
             Configure sua secretária em poucas horas e comece a ver novos agendamentos caindo diretamente na sua agenda de forma automatizada e profissional.
           </p>
           <div className="flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
@@ -1223,7 +1333,7 @@ const SecretariaVirtual = () => {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-slate-800 bg-slate-900/40 px-5 text-xs font-bold uppercase tracking-wider text-slate-200 transition hover:border-slate-700 hover:bg-slate-900/80 sm:h-14 sm:px-8 sm:text-sm"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-5 text-xs font-bold uppercase tracking-wider text-slate-800 shadow-sm transition hover:border-emerald-300 hover:bg-emerald-50 sm:h-14 sm:px-8 sm:text-sm"
             >
               Falar com Consultor
               <ArrowUpRight className="h-4 w-4 text-emerald-400" />
@@ -1233,10 +1343,22 @@ const SecretariaVirtual = () => {
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-slate-900 bg-slate-950/80 py-8 sm:py-12">
+      <footer className="border-t border-slate-200 bg-white py-8 sm:py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-          <ProntofyLogo iconClassName="h-8 w-8 text-emerald-500" textClassName="text-xs font-light text-slate-300" />
-          <p className="text-xs text-slate-600 font-bold">
+          <div className="flex items-center gap-4" aria-label="Prontofy">
+            <img
+              src={footerLogoImage}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              className="h-8 w-8 shrink-0 object-contain"
+              aria-hidden="true"
+            />
+            <span className="text-xs font-light uppercase tracking-[0.34em] text-slate-950">
+              Prontofy
+            </span>
+          </div>
+          <p className="text-xs text-slate-500 font-bold">
             © {new Date().getFullYear()} Prontofy. Todos os direitos reservados.
           </p>
         </div>
