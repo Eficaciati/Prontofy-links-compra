@@ -3,7 +3,7 @@ import { ArrowLeft, ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import ProntofyLogo from "@/components/ProntofyLogo";
 import cardPatients from "@/assets/card-patients.jpg";
 
-const WEBHOOK_URL = "https://teste-n8n-editor.6esqeg.easypanel.host/webhook-test/telemedicina";
+const WEBHOOK_URL = "https://teste-n8n-webhook.6esqeg.easypanel.host/webhook/telemedicina";
 
 type TelemedicineFormState = {
   nome: string;
@@ -156,7 +156,8 @@ const Telemedicina = () => {
             <ProntofyLogo />
             <p className="mt-8 text-xs font-black uppercase tracking-[0.18em] text-emerald-300 sm:mt-10 sm:text-sm sm:tracking-[0.2em] lg:mt-12">Telemedicina com IA</p>
             <h1 className="mx-auto mt-4 max-w-3xl text-[clamp(27px,7.6vw,58px)] font-extrabold leading-[1.04] lg:mx-0 lg:leading-[1]">
-              Inscreva seu interesse para ter acesso à telemedicina.
+              Inscreva-se para ter acesso prioritário a telemedicina do prontofy.
+        
             </h1>
             <p className="mx-auto mt-5 max-w-2xl text-sm leading-6 text-white/72 sm:text-base sm:leading-7 lg:mx-0 lg:mt-6 lg:text-lg lg:leading-8">
               Faça seu cadastro e receba uma oferta exclusiva para participar da telemedicina da Prontofy. Aqui você pode receber tratamento e acesso exclusivos.
@@ -173,7 +174,7 @@ const Telemedicina = () => {
                   </span>
                   <h2 className="mt-5 text-2xl font-extrabold">Interesse enviado</h2>
                   <p className="mx-auto mt-3 max-w-sm text-sm leading-6 text-white/64">
-                    Recebemos seus dados. Nossa equipe poderá entrar em contato quando houver novidades sobre o acesso à telemedicina.
+                    Recebemos seus sua inscrição, em breve nossa equipe podetá entrar em contato para ativa-lo na telemedicina da Prontofy.
                   </p>
                 </div>
               ) : (

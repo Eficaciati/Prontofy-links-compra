@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, type TouchEvent } from "react";
 import {
   ArrowRight,
   Bot,
@@ -204,12 +204,35 @@ const SecretariaVirtual = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [activeAiCard, setActiveAiCard] = useState(0);
+  const aiCardTouchStartX = useRef(0);
+  const aiCardTouchStartY = useRef(0);
 
   const totalLostRevenue = lostCalls * consultationValue;
   const recoveredRevenue = Math.round(lostCalls * consultationValue * 0.75); // 75% recuperados
   const yearlySavings = recoveredRevenue * 12;
   const activeAiExperience = aiExperienceCards[activeAiCard];
   const ActiveAiIcon = activeAiExperience.icon;
+  const isTriagemCard = activeAiExperience.title === "Triagem inteligente.";
+
+  const handleAiCardTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    const touch = event.touches[0];
+    aiCardTouchStartX.current = touch.clientX;
+    aiCardTouchStartY.current = touch.clientY;
+  };
+
+  const handleAiCardTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
+    const touch = event.changedTouches[0];
+    const deltaX = touch.clientX - aiCardTouchStartX.current;
+    const deltaY = touch.clientY - aiCardTouchStartY.current;
+
+    if (Math.abs(deltaX) < 45 || Math.abs(deltaX) < Math.abs(deltaY)) return;
+
+    setActiveAiCard((current) =>
+      deltaX < 0
+        ? (current + 1) % aiExperienceCards.length
+        : (current - 1 + aiExperienceCards.length) % aiExperienceCards.length
+    );
+  };
 
   useEffect(() => {
     const interval = window.setInterval(() => {
@@ -617,15 +640,21 @@ const SecretariaVirtual = () => {
           </div>
 
           <div className="reveal-on-scroll relative overflow-hidden rounded-2xl border border-emerald-500/15 bg-slate-950 shadow-[0_22px_60px_rgba(0,0,0,0.28)] sm:rounded-3xl sm:shadow-[0_30px_90px_rgba(0,0,0,0.34)]" data-reveal>
-            <div className="relative min-h-[430px] sm:min-h-[560px]">
+            <div
+              className="relative min-h-[430px] touch-pan-y sm:min-h-[560px]"
+              onTouchStart={handleAiCardTouchStart}
+              onTouchEnd={handleAiCardTouchEnd}
+            >
               <img
                 key={activeAiExperience.title}
                 src={activeAiExperience.image}
                 alt={activeAiExperience.title}
                 loading="lazy"
                 decoding="async"
-                className={`absolute inset-0 h-full w-full object-cover opacity-95 transition duration-700 ${
-                  activeAiExperience.image === agendaImage ? "-translate-x-20 scale-110 sm:translate-x-0 sm:scale-100" : ""
+                className={`absolute inset-0 h-full w-full opacity-95 transition duration-700 ${
+                  activeAiExperience.image === agendaImage
+                    ? "object-contain object-top sm:object-cover sm:object-center"
+                    : "object-cover"
                 }`}
               />
               <div className="absolute inset-0 bg-[linear-gradient(90deg,#03060a_0%,rgba(3,6,10,0.78)_40%,rgba(3,6,10,0.2)_100%)]" />
@@ -635,7 +664,7 @@ const SecretariaVirtual = () => {
                 type="button"
                 aria-label="Ver card anterior"
                 onClick={() => setActiveAiCard((current) => (current - 1 + aiExperienceCards.length) % aiExperienceCards.length)}
-                className="absolute left-3 top-1/2 z-20 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-slate-950/55 text-white backdrop-blur transition hover:border-emerald-400/50 hover:bg-emerald-500/20 sm:left-5 sm:h-12 sm:w-12"
+                className="absolute left-0 top-1/2 z-20 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-slate-950/55 text-white backdrop-blur transition hover:border-emerald-400/50 hover:bg-emerald-500/20 sm:left-5 sm:h-12 sm:w-12"
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
@@ -643,14 +672,14 @@ const SecretariaVirtual = () => {
                 type="button"
                 aria-label="Ver prÃ³ximo card"
                 onClick={() => setActiveAiCard((current) => (current + 1) % aiExperienceCards.length)}
-                className="absolute right-3 top-1/2 z-20 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-slate-950/55 text-white backdrop-blur transition hover:border-emerald-400/50 hover:bg-emerald-500/20 sm:right-5 sm:h-12 sm:w-12"
+                className="absolute right-0 top-1/2 z-20 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-slate-950/55 text-white backdrop-blur transition hover:border-emerald-400/50 hover:bg-emerald-500/20 sm:right-5 sm:h-12 sm:w-12"
               >
                 <ChevronRight className="h-5 w-5" />
               </button>
 
               <div className="relative z-10 flex min-h-[430px] items-end px-5 pb-11 pt-20 sm:min-h-[560px] sm:px-10 sm:pb-12 lg:px-16">
-                <div className="max-w-2xl space-y-4 sm:space-y-5">
-                  <span className="inline-flex h-12 w-12 place-items-center rounded-2xl border border-emerald-500/25 bg-emerald-500/10 text-emerald-400 shadow-[0_0_30px_rgba(16,185,129,0.16)]">
+                <div className={`max-w-2xl space-y-4 sm:space-y-5 ${isTriagemCard ? "pl-7 sm:pl-0" : ""}`}>
+                  <span className="hidden h-12 w-12 place-items-center rounded-2xl border border-emerald-500/25 bg-emerald-500/10 text-emerald-400 shadow-[0_0_30px_rgba(16,185,129,0.16)] sm:inline-flex">
                     <ActiveAiIcon className="mx-auto h-6 w-6" />
                   </span>
                   <div className="space-y-3">
