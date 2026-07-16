@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, type TouchEvent } from "react";
+﻿import { useState, useEffect, useRef, type TouchEvent } from "react";
 import {
   ArrowRight,
   Bot,
@@ -43,7 +43,9 @@ import whatsappLogo from "@/assets/whatsapp-logo.png";
 import footerLogoImage from "@/assets/Imagem-title-2.png";
 
 const WHATSAPP_URL = "https://wa.me/message/YO6R73FVJZHTC1";
-const CONFIG_URL = "/configuracao-secretaria-ia";
+const HF2_WHATSAPP_URL = `${WHATSAPP_URL}?text=${encodeURIComponent("olá quero saber mais sobre o HF2")}`;
+const CREATE_ACCOUNT_URL = "/apresentacao/formulario";
+const CONFIG_URL = CREATE_ACCOUNT_URL;
 const INFRASTRUCTURE_NOTE =
   "* Valores referentes ao desenvolvimento/licenciamento do agente. Custos de hospedagem, APIs (OpenAI, WhatsApp, etc.), banco de dados, servidores e demais serviços de infraestrutura são de responsabilidade do cliente. Consulte os Termos de Uso para detalhes.";
 
@@ -53,8 +55,8 @@ const products = [
     price: "R$ 249,90",
     purchaseNote: "Compra única. Agente sujeito às condições dos termos de uso.",
     eyebrow: "Entrada inteligente",
-    idealFor: "Para consultórios que querem começar sem complexidade.",
-    description: "Uma secretária virtual no WhatsApp para responder, filtrar pacientes e organizar as primeiras conversas pelo WhatsApp.",
+    idealFor: "Para médicos que querem começar sem complexidade.",
+    description: "Ela responde dúvidas frequentes, filtra pacientes, organiza solicitações básicas e ajuda o médico a não perder oportunidades pelo WhatsApp.",
     icon: Bot,
     tone: "border-slate-200 bg-white shadow-[0_18px_45px_rgba(15,23,42,0.08)] hover:border-slate-300",
     highlights: ["Respostas para dúvidas frequentes", "Triagem inicial de pacientes", "Organização de solicitações básicas"],
@@ -71,7 +73,7 @@ const products = [
     description: "Um modelo robusto de secretária virtual para WhatsApp, conectado à plataforma Prontofy para ajudar a cuidar de agendamentos, pagamentos e receita da clínica.",
     icon: Sparkles,
     tone: "border-emerald-500 bg-white shadow-[0_24px_70px_rgba(16,185,129,0.22)] ring-1 ring-emerald-500/20",
-    highlights: ["Agenda, pagamentos e receita acompanhados pela IA", "Resolução inteligente de problemas", "Manutenção incluída por 2 meses"],
+    highlights: ["Resolução mais inteligente de problemas", "Menor necessidade de revisão humana", "Atendimento pelo WhatsApp"],
     comparisonFeatures: ["Primeiro atendimento pelo WhatsApp", "Integração direta com a agenda da clínica", "Manutenção incluída por 2 meses"],
     cta: "Quero conhecer o HF1",
     href: CONFIG_URL,
@@ -82,14 +84,14 @@ const products = [
     price: "R$ 7.499,80",
     purchaseNote: "Compra única. Inclui 1 mês de Plano Gold Enterprise.",
     eyebrow: "Premium Enterprise",
-    idealFor: "Para operações que querem IA, gestão e automação financeira.",
+    idealFor: "Para clínicas de luxo que buscam uma IA, gestão e automações financeiras.",
     description: "Uma secretária virtual exclusiva, nosso modelo premium para clínicas mais sofisticadas. Ela organiza o atendimento, apoia agendamentos, é capaz de pagar contas, acompanha demandas financeiras e conta com suporte dedicado para manter a operação da clínica mais inteligente.",
     icon: Building2,
     tone: "border-[#D9B85F]/70 bg-white shadow-[0_24px_70px_rgba(217,184,95,0.18)]",
     highlights: ["Tudo dos modelos anteriores", "Plano enterprise", "Pagamentos de contas e gerenciamento financeiro"],
     comparisonFeatures: ["Primeiro atendimento pelo WhatsApp", "Integração direta com a agenda da clínica", "Manutenção incluída por 2 meses", "Plano enterprise customizado", "Automação financeira e pagamento de contas"],
     cta: "Falar sobre HF2",
-    href: WHATSAPP_URL,
+    href: HF2_WHATSAPP_URL,
     premium: true,
   },
 ];
@@ -157,8 +159,8 @@ const faqs = [
 
 const chatScenarios = {
   agendamento: [
-    { sender: "user", text: "Olá! Gostaria de agendar uma consulta com o Dr. Carlos para dermatologia." },
-    { sender: "bot", text: "Olá! Sou a Assistente Virtual do Dr. Carlos. Claro! Você já se consultou com ele antes ou é a sua primeira consulta?" },
+    { sender: "user", text: "Olá! Gostaria de agendar uma consulta com a Dra. Amanda para dermatologia." },
+    { sender: "bot", text: "Olá! Sou a Assistente Virtual da Dra. Amanda. Claro! Você já se consultou com ela antes ou é a sua primeira consulta?" },
     { sender: "user", text: "Sou paciente nova." },
     { sender: "bot", text: "Seja muito bem-vinda! Tenho horários disponíveis nesta terça às 14:00 ou na quinta às 10:30. Qual fica melhor para você?" },
     { sender: "user", text: "Terça às 14:00 está ótimo." },
@@ -213,6 +215,7 @@ const SecretariaVirtual = () => {
   const activeAiExperience = aiExperienceCards[activeAiCard];
   const ActiveAiIcon = activeAiExperience.icon;
   const isTriagemCard = activeAiExperience.title === "Triagem inteligente.";
+  const usesLowerMobileFade = isTriagemCard || activeAiExperience.title === "Atendimento 24 horas.";
 
   const handleAiCardTouchStart = (event: TouchEvent<HTMLDivElement>) => {
     const touch = event.touches[0];
@@ -352,10 +355,8 @@ const SecretariaVirtual = () => {
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-[#03060a] text-slate-100 selection:bg-emerald-500/30">
       <a
-        href={WHATSAPP_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Falar no WhatsApp"
+        href={CREATE_ACCOUNT_URL}
+        aria-label="Criar conta"
         className="fixed bottom-4 right-4 z-[60] grid h-[52px] w-[52px] place-items-center rounded-full border border-emerald-500/20 bg-white shadow-[0_18px_45px_rgba(0,0,0,0.22)] transition hover:scale-105 sm:bottom-6 sm:right-6 sm:h-14 sm:w-14"
       >
         <img src={whatsappLogo} alt="" className="h-10 w-10 object-contain sm:h-11 sm:w-11" />
@@ -372,11 +373,17 @@ const SecretariaVirtual = () => {
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:h-20 sm:px-6 lg:px-8">
           <ProntofyLogo iconClassName="h-8 w-8 sm:h-10 sm:w-10 text-emerald-400" textClassName="text-xs font-light sm:text-base text-white" />
           <nav className="hidden items-center gap-4 md:flex">
-            <a href="#modelos" className="text-sm font-medium text-slate-400 transition hover:text-white">
-              Modelos
+            <a href="#inicio" className="text-sm font-medium text-slate-400 transition hover:text-white">
+              Início
             </a>
             <a href="#antes-depois" className="text-sm font-medium text-slate-400 transition hover:text-white">
               Antes & Depois
+            </a>
+            <a href="#modelos" className="text-sm font-medium text-slate-400 transition hover:text-white">
+              Modelos
+            </a>
+            <a href="#duvidas" className="text-sm font-medium text-slate-400 transition hover:text-white">
+              Dúvidas
             </a>
           </nav>
           <button
@@ -393,11 +400,11 @@ const SecretariaVirtual = () => {
           <nav className="border-t border-slate-900 bg-slate-950/95 px-4 py-3 shadow-2xl backdrop-blur-md md:hidden">
             <div className="mx-auto grid max-w-7xl gap-2">
               <a
-                href="#modelos"
+                href="#inicio"
                 onClick={() => setIsMobileNavOpen(false)}
                 className="rounded-xl px-3 py-3 text-sm font-bold text-slate-200 transition hover:bg-slate-900/70 hover:text-white"
               >
-                Modelos
+                Início
               </a>
               <a
                 href="#antes-depois"
@@ -406,6 +413,20 @@ const SecretariaVirtual = () => {
               >
                 Antes & Depois
               </a>
+              <a
+                href="#modelos"
+                onClick={() => setIsMobileNavOpen(false)}
+                className="rounded-xl px-3 py-3 text-sm font-bold text-slate-200 transition hover:bg-slate-900/70 hover:text-white"
+              >
+                Modelos
+              </a>
+              <a
+                href="#duvidas"
+                onClick={() => setIsMobileNavOpen(false)}
+                className="rounded-xl px-3 py-3 text-sm font-bold text-slate-200 transition hover:bg-slate-900/70 hover:text-white"
+              >
+                Dúvidas
+              </a>
             </div>
           </nav>
         )}
@@ -413,7 +434,7 @@ const SecretariaVirtual = () => {
       <div className="h-16 md:hidden" />
 
       {/* HERO SECTION */}
-      <section className="relative overflow-hidden px-4 pb-12 pt-8 sm:px-6 sm:pb-16 sm:pt-10 lg:px-8 lg:pb-20 lg:pt-14">
+      <section id="inicio" className="relative overflow-hidden px-4 pb-12 pt-8 sm:px-6 sm:pb-16 sm:pt-10 lg:px-8 lg:pb-20 lg:pt-14">
         <div className="absolute inset-0 z-0">
           <video
             src={estetoAnimatedVideo}
@@ -617,7 +638,7 @@ const SecretariaVirtual = () => {
               href={CONFIG_URL}
               className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-emerald-500 px-5 text-xs font-bold uppercase tracking-wider text-slate-950 shadow-[0_20px_50px_rgba(16,185,129,0.2)] transition hover:bg-emerald-400 sm:w-auto sm:px-6"
             >
-              Configurar minha secretária
+              Quero minha secretária
               <ArrowRight className="h-4 w-4" />
             </a>
           </div>
@@ -657,8 +678,20 @@ const SecretariaVirtual = () => {
                     : "object-cover"
                 }`}
               />
-              <div className="absolute inset-0 bg-[linear-gradient(90deg,#03060a_0%,rgba(3,6,10,0.78)_40%,rgba(3,6,10,0.2)_100%)]" />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,6,10,0.18)_0%,rgba(3,6,10,0.08)_44%,#03060a_100%)]" />
+              <div
+                className={`absolute inset-0 ${
+                  usesLowerMobileFade
+                    ? "bg-[linear-gradient(90deg,rgba(3,6,10,0.44)_0%,rgba(3,6,10,0.24)_42%,rgba(3,6,10,0.08)_100%)] sm:bg-[linear-gradient(90deg,#03060a_0%,rgba(3,6,10,0.78)_40%,rgba(3,6,10,0.2)_100%)]"
+                    : "bg-[linear-gradient(90deg,#03060a_0%,rgba(3,6,10,0.78)_40%,rgba(3,6,10,0.2)_100%)]"
+                }`}
+              />
+              <div
+                className={`absolute inset-0 ${
+                  usesLowerMobileFade
+                    ? "bg-[linear-gradient(180deg,rgba(3,6,10,0.02)_0%,rgba(3,6,10,0.08)_48%,rgba(3,6,10,0.62)_72%,#03060a_100%)] sm:bg-[linear-gradient(180deg,rgba(3,6,10,0.18)_0%,rgba(3,6,10,0.08)_44%,#03060a_100%)]"
+                    : "bg-[linear-gradient(180deg,rgba(3,6,10,0.18)_0%,rgba(3,6,10,0.08)_44%,#03060a_100%)]"
+                }`}
+              />
 
               <button
                 type="button"
@@ -670,7 +703,7 @@ const SecretariaVirtual = () => {
               </button>
               <button
                 type="button"
-                aria-label="Ver prÃ³ximo card"
+                aria-label="Ver próximo card"
                 onClick={() => setActiveAiCard((current) => (current + 1) % aiExperienceCards.length)}
                 className="absolute right-0 top-1/2 z-20 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/15 bg-slate-950/55 text-white backdrop-blur transition hover:border-emerald-400/50 hover:bg-emerald-500/20 sm:right-5 sm:h-12 sm:w-12"
               >
@@ -722,7 +755,7 @@ const SecretariaVirtual = () => {
               href={CONFIG_URL}
               className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-emerald-500 px-5 text-xs font-bold uppercase tracking-wider text-slate-950 shadow-[0_20px_50px_rgba(16,185,129,0.22)] transition hover:bg-emerald-400 sm:w-auto sm:px-7"
             >
-              Configurar minha secretária
+              Quero minha secretária
               <ArrowRight className="h-4 w-4" />
             </a>
           </div>
@@ -970,7 +1003,7 @@ const SecretariaVirtual = () => {
                 </div>
 
                 <a
-                  href={WHATSAPP_URL}
+                  href={CREATE_ACCOUNT_URL}
                   className="w-full py-4 bg-emerald-500 text-slate-950 rounded-xl font-bold text-xs uppercase tracking-widest text-center shadow-lg transition hover:bg-emerald-400"
                 >
                   Começar a Recuperar Faturamento
@@ -1144,6 +1177,8 @@ const SecretariaVirtual = () => {
                       </div>
                       <a
                         href={product.href}
+                        target={product.href.startsWith("http") ? "_blank" : undefined}
+                        rel={product.href.startsWith("http") ? "noopener noreferrer" : undefined}
                         className={`order-5 inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg text-xs font-black uppercase tracking-wider transition sm:h-12 ${
                           product.featured
                             ? "bg-emerald-500 text-slate-950 hover:bg-emerald-400"
@@ -1253,7 +1288,7 @@ const SecretariaVirtual = () => {
               <span>Modelo HF2 Enterprise</span>
             </div>
             <h2 className="text-3xl font-extrabold leading-tight text-white drop-shadow-[0_10px_30px_rgba(0,0,0,0.45)] sm:text-4xl lg:text-5xl">
-              A secretária para clínicas com demandas complexas de gestão financeira.
+              A secretária perfeita para clínicas de luxo.
             </h2>
             <p className="max-w-lg text-sm leading-relaxed text-slate-300">
               Para consultórios grandes e franquias que precisam unir atendimento, controle financeiro e automações em uma operação mais inteligente.
@@ -1272,10 +1307,10 @@ const SecretariaVirtual = () => {
 
                 return (
               <div key={item.title} className="flex flex-col items-center text-center text-white drop-shadow-[0_8px_22px_rgba(0,0,0,0.65)]">
-                    <span className="grid h-14 w-14 place-items-center text-white">
-                      <Icon className="h-9 w-9 stroke-[2.1]" />
+                    <span className="grid h-10 w-10 place-items-center text-white sm:h-14 sm:w-14">
+                      <Icon className="h-6 w-6 stroke-[2.1] sm:h-9 sm:w-9" />
                     </span>
-                    <h3 className="mt-2 max-w-[140px] text-[11px] font-black uppercase leading-tight tracking-wide sm:text-xs">{item.title}</h3>
+                    <h3 className="mt-1.5 max-w-[112px] text-[9px] font-black uppercase leading-tight tracking-wide sm:mt-2 sm:max-w-[140px] sm:text-xs">{item.title}</h3>
                   </div>
                 );
               })}
@@ -1283,7 +1318,7 @@ const SecretariaVirtual = () => {
 
             <div className="flex justify-center">
               <a
-                href={WHATSAPP_URL}
+                href={CREATE_ACCOUNT_URL}
                 className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[#D9B85F] px-5 text-xs font-bold uppercase tracking-wider text-[#120f08] shadow-[0_20px_50px_rgba(217,184,95,0.2)] transition hover:bg-[#ebd28b] sm:h-14 sm:w-auto sm:px-8 sm:text-sm"
               >
                 Solicitar proposta enterprise
@@ -1295,7 +1330,7 @@ const SecretariaVirtual = () => {
       </section>
 
       {/* SEÇÃO FAQ ( Custom Accordions ) */}
-      <section className="relative border-t border-slate-900 bg-slate-950/40 py-12 sm:py-20">
+      <section id="duvidas" className="relative border-t border-slate-900 bg-slate-950/40 py-12 sm:py-20">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           
           <div className="reveal-on-scroll mb-8 space-y-4 text-center sm:mb-12" data-reveal>

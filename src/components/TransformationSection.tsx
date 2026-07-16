@@ -5,7 +5,7 @@ const TransformationSection = () => {
     <section className="relative min-h-[620px] overflow-hidden bg-[#050709] text-white sm:min-h-[640px] lg:min-h-[720px]">
       <img
         src={antesDepoisImage}
-        alt="Comparativo visual antes e depois da gestao Prontofy"
+        alt="Comparativo visual antes e depois da gestão Prontofy"
         className="absolute inset-0 h-full w-full object-cover object-[57%_50%] sm:object-center"
       />
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,7,9,0.78)_0%,rgba(5,7,9,0.48)_46%,rgba(5,7,9,0.08)_100%)] sm:bg-[linear-gradient(90deg,rgba(5,7,9,0.76)_0%,rgba(5,7,9,0.44)_42%,rgba(5,7,9,0.1)_100%)]" />
@@ -16,13 +16,13 @@ const TransformationSection = () => {
       <div className="relative z-10 mx-auto flex min-h-[620px] max-w-7xl flex-col justify-between px-4 py-6 sm:min-h-[640px] sm:px-8 sm:py-10 lg:min-h-[720px] lg:px-10 lg:py-14">
         <div className="lead-enter max-w-[315px] sm:max-w-3xl">
           <p className="mb-4 inline-flex rounded-full border border-white/12 bg-white/7 px-3 py-2 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-emerald-300 backdrop-blur sm:px-4 sm:text-sm sm:tracking-[0.18em]">
-            Transformacao na gestao
+            Transformação na gestão
           </p>
           <h2 className="max-w-3xl text-[2rem] font-extrabold leading-[1] text-white drop-shadow-[0_14px_36px_rgba(0,0,0,0.68)] sm:text-[clamp(34px,4vw,58px)]">
-            Saia da rotina reativa para uma clinica mais previsivel.
+            Saia da rotina reativa para uma clínica mais previsível.
           </h2>
           <p className="mt-4 max-w-[285px] text-sm font-medium leading-6 text-white/74 drop-shadow-[0_8px_22px_rgba(0,0,0,0.72)] sm:mt-6 sm:max-w-2xl sm:text-lg sm:font-normal sm:leading-8 sm:text-white/70">
-            A Prontofy ajuda sua equipe a trocar controles soltos por uma operacao centralizada, clara e pronta para crescer.
+            A Prontofy ajuda você e sua equipe a trocar uma rotina estressante por dias organizados, focados em crescer.
           </p>
         </div>
 
@@ -36,7 +36,7 @@ const TransformationSection = () => {
           <div className="max-w-[280px] justify-self-end text-right">
             <p className="text-[0.65rem] font-black uppercase tracking-[0.2em] text-emerald-300 sm:text-xs">Depois</p>
             <h3 className="mt-1 text-lg font-extrabold leading-tight text-white drop-shadow-[0_8px_24px_rgba(0,0,0,0.82)] sm:mt-2 sm:text-2xl">
-              Gestao visivel
+              Gestão visível
             </h3>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { CalendarCheck, MessageCircle, Play } from "lucide-react";
+﻿import { CalendarCheck, MessageCircle, Play } from "lucide-react";
 import AgendaAISection from "./AgendaAISection";
 import AudienceSection from "./AudienceSection";
 import AuthoritySection from "./AuthoritySection";
@@ -10,7 +10,7 @@ import TransformationSection from "./TransformationSection";
 import cardClinic from "@/assets/card-clinic.jpg";
 import { trackEvent } from "@/utils/track";
 
-const WHATSAPP_LINK = "https://wa.me/message/YO6R73FVJZHTC1";
+const PRESENTATION_FORM_LINK = "/apresentacao/formulario";
 const PRESENTATION_VIDEO_URL = "";
 
 const TemporaryHero = () => {
@@ -23,7 +23,7 @@ const TemporaryHero = () => {
           <div className="absolute inset-x-0 bottom-0 h-36 bg-[linear-gradient(180deg,rgba(5,7,9,0)_0%,#050709_100%)]" />
         </div>
 
-        <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 px-5 py-10 sm:px-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12">
+        <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-5 py-10 sm:px-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12">
           <div className="flex flex-col items-start gap-8">
             <div className="lead-enter">
               <ProntofyLogo />
@@ -35,24 +35,24 @@ const TemporaryHero = () => {
                 Apresentação exclusiva para clínicas
               </p>
               <h1 className="max-w-4xl text-5xl font-extrabold leading-[0.98] tracking-normal text-white sm:text-6xl lg:text-7xl">
-                Mude a gestão da sua clínica
+                Mude a rotina da sua clínica
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-white/72 sm:text-xl">
-                Prontuário, agenda, automações e inteligência artificial trabalhando juntos para simplificar a rotina da sua equipe.
+                 Organize seus atendimentos em um só lugar. Seus prontuários, agenda, automações e inteligência artificial trabalhando juntos para simplificar a rotina da sua equipe.
               </p>
             </div>
 
-            <div className="lead-enter lead-enter-delay-2 flex w-full justify-center">
+            <div className="hidden">
               <a
-                href="#video-apresentacao"
+                href={PRESENTATION_FORM_LINK}
                 onClick={() =>
                   trackEvent("cta_click", {
                     location: "hero",
                     button_text: "Quero evoluir minha gestão",
-                    action: "scroll_to_video",
+                    action: "open_presentation_form",
                   })
                 }
-                className="inline-flex items-center justify-center gap-3 rounded-md bg-[#19c879] px-6 py-4 text-center text-base font-bold uppercase tracking-wide text-[#04110b] shadow-[0_18px_44px_rgba(25,200,121,0.28)] transition hover:bg-[#35df91] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#19c879] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050709]"
+                className="mx-auto inline-flex items-center justify-center gap-3 rounded-md bg-[#19c879] px-6 py-4 text-center text-base font-bold uppercase tracking-wide text-[#04110b] shadow-[0_18px_44px_rgba(25,200,121,0.28)] transition hover:bg-[#35df91] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#19c879] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050709]"
               >
                 <MessageCircle className="h-5 w-5 shrink-0" />
                 <span className="flex-1 text-center sm:flex-none">Quero evoluir minha gestão</span>
@@ -90,22 +90,36 @@ const TemporaryHero = () => {
               </div>
             </div>
             <a
-              href={WHATSAPP_LINK}
-              target="_blank"
-              rel="noreferrer"
+              href={PRESENTATION_FORM_LINK}
               onClick={() =>
                 trackEvent("cta_click", {
                   location: "presentation_video",
                   button_text: "Quero agendar minha apresentação",
-                  action: "open_whatsapp",
+                  action: "open_presentation_form",
                 })
               }
-              className="mt-5 inline-flex w-full items-center justify-center gap-3 rounded-md bg-[#19c879] px-6 py-4 text-center text-base font-bold uppercase tracking-wide text-[#04110b] shadow-[0_18px_44px_rgba(25,200,121,0.28)] transition hover:bg-[#35df91] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#19c879] focus-visible:ring-offset-2 focus-visible:ring-offset-[#050709]"
+              className="hidden"
             >
               <MessageCircle className="h-5 w-5 shrink-0" />
               <span className="flex-1 text-center sm:flex-none">Quero agendar minha apresentação</span>
             </a>
           </div>
+        </div>
+        <div className="absolute bottom-12 left-1/2 z-20 flex -translate-x-1/2 justify-center sm:bottom-14">
+          <a
+            href={PRESENTATION_FORM_LINK}
+            onClick={() =>
+              trackEvent("cta_click", {
+                location: "hero",
+                button_text: "Quero evoluir minha gestão",
+                action: "open_presentation_form",
+              })
+            }
+            className="inline-flex items-center justify-center gap-3 rounded-md bg-[#19c879] px-6 py-4 text-center text-base font-bold uppercase tracking-wide text-[#04110b] shadow-[0_18px_44px_rgba(25,200,121,0.28)] transition hover:bg-[#35df91]"
+          >
+            <MessageCircle className="h-5 w-5 shrink-0" />
+            <span>Quero evoluir minha gestão</span>
+          </a>
         </div>
       </section>
       <AuthoritySection />

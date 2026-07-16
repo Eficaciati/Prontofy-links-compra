@@ -1,4 +1,4 @@
-import { FormEvent, ReactNode, useMemo, useState, useEffect, useRef, useCallback } from "react";
+﻿import { FormEvent, ReactNode, useMemo, useState, useEffect, useRef, useCallback } from "react";
 import {
   Activity,
   ArrowDown,
@@ -128,37 +128,37 @@ const steps = [
   },
 ];
 const platformModules = [
-  { icon: Users, title: "Gestao de pacientes", text: "Pacientes, atendimentos e historico centralizados." },
-  { icon: Stethoscope, title: "Atendimento e consultas", text: "Consultas, procedimentos, evolucao e documentos." },
-  { icon: CalendarCheck, title: "Gestao de agenda", text: "Consultas, horarios, sala de espera e lembretes." },
-  { icon: Wallet, title: "Financeiro", text: "Contas, faturamento, previsao e controle do caixa." },
-  { icon: MessageCircle, title: "CRM e relacionamento", text: "Comunicacao com pacientes e automacoes de contato." },
-  { icon: Activity, title: "Ambulancias", text: "Gestao de ambulancias e operacao assistencial." },
-  { icon: LineChart, title: "Relatorios", text: "Analytics, KPIs e indicadores para decisao." },
-  { icon: ShieldCheck, title: "Administracao", text: "Configuracoes internas, usuarios, seguranca e permissoes." },
-  { icon: Sparkles, title: "Recursos extras", text: "Integracoes, ferramentas e funcionalidades avancadas." },
+  { icon: Users, title: "Gestão de pacientes", text: "Pacientes, atendimentos e histórico centralizados." },
+  { icon: Stethoscope, title: "Atendimento e consultas", text: "Consultas, procedimentos, evolução e documentos." },
+  { icon: CalendarCheck, title: "Gestão de agenda", text: "Consultas, horários, sala de espera e lembretes." },
+  { icon: Wallet, title: "Financeiro", text: "Contas, faturamento, previsão e controle do caixa." },
+  { icon: MessageCircle, title: "CRM e relacionamento", text: "Comunicação com pacientes e automações de contato." },
+  { icon: Activity, title: "Ambulâncias", text: "Gestão de ambulâncias e operação assistencial." },
+  { icon: LineChart, title: "Relatórios", text: "Analytics, KPIs e indicadores para decisão." },
+  { icon: ShieldCheck, title: "Administração", text: "Configurações internas, usuários, segurança e permissões." },
+  { icon: Sparkles, title: "Recursos extras", text: "Integrações, ferramentas e funcionalidades avançadas." },
 ];
 
 const includedFeatures = [
-  "Transcricao inteligente com IA",
+  "Transcrição inteligente com IA",
   "Easy GPT com AutoPrompt",
-  "Identificacao de deficiencias nutricionais",
+  "Identificação de deficiências nutricionais",
   "Analisador de dosagens",
-  "Assistente de diagnostico",
-  "Resumo do historico do paciente",
-  "Agente de recomendacao de prescricao",
-  "Agente de recomendacao de pedido de exames",
-  "Agente de recomendacao de planos alimentares",
+  "Assistente de diagnóstico",
+  "Resumo do histórico do paciente",
+  "Agente de recomendação de prescrição",
+  "Agente de recomendação de pedido de exames",
+  "Agente de recomendação de planos alimentares",
   "Assinatura com certificado digital",
-  "Exames laboratoriais com extracao automatica e graficos evolutivos",
-  "Extracao automatica de bioimpedancia",
-  "Relatorios e lista de tarefas",
-  "Agenda PRO com salas, historico e sala de espera",
+  "Exames laboratoriais com extração automática e gráficos evolutivos",
+  "Extração automática de bioimpedância",
+  "Relatórios e lista de tarefas",
+  "Agenda PRO com salas, histórico e sala de espera",
   "Link para agendamentos",
-  "Envio rapido de documentos via WhatsApp",
+  "Envio rápido de documentos via WhatsApp",
   "Easy Patient, aplicativo do paciente",
-  "Modulo financeiro",
-  "Laminas educativas",
+  "Módulo financeiro",
+  "Lâminas educativas",
   "Plano alimentar com modelos exclusivos",
 ];
 
@@ -166,43 +166,43 @@ const pricingPlans = [
   {
     name: "Single",
     price: "R$ 200,00",
-    period: "/mes",
-    audience: "Medicos individuais",
+    period: "/mês",
+    audience: "Médicos individuais",
     button: "Escolher plano",
     featured: false,
-    features: ["1 clinica", "Ate 2 usuarios", "Ate 8.000 pacientes", "Oswald AI com 10 creditos", "Suporte completo incluso na assinatura"],
+    features: ["1 clínica", "Até 2 usuários", "Até 8.000 pacientes", "Oswald AI com 10 créditos", "Suporte completo incluso na assinatura"],
   },
   {
     name: "Pro Max",
     price: "R$ 597,00",
-    period: "/mes",
-    audience: "Clinicas em crescimento",
+    period: "/mês",
+    audience: "Clínicas em crescimento",
     button: "Escolher plano",
     featured: true,
     features: [
-      "Ate 2 clinicas",
-      "Ate 3 usuarios",
-      "Ate 15.000 pacientes",
-      "Oswald AI com 50 creditos",
-      "Secretaria IA inclusa com configuracao gratis",
+      "Até 2 clínicas",
+      "Até 3 usuários",
+      "Até 15.000 pacientes",
+      "Oswald AI com 50 créditos",
+      "Secretária IA inclusa com configuração grátis",
       "Suporte completo incluso na assinatura",
-      "Importacao de dados antigos inclusa",
+      "Importação de dados antigos inclusa",
     ],
   },
   {
     name: "Enterprise",
     price: "Sob consulta",
     period: "",
-    audience: "Operacoes maiores e clinicas estruturadas",
+    audience: "Operações maiores e clínicas estruturadas",
     button: "Falar com vendas",
     featured: false,
     features: [
-      "Mais clinicas sob demanda",
-      "Mais usuarios sob demanda",
-      "Mais pacientes por clinica",
-      "Mais creditos do Oswald AI",
-      "Suporte completo prioritario",
-      "Importacao de dados antigos inclusa",
+      "Mais clínicas sob demanda",
+      "Mais usuários sob demanda",
+      "Mais pacientes por clínica",
+      "Mais créditos do Oswald AI",
+      "Suporte completo prioritário",
+      "Importação de dados antigos inclusa",
     ],
   },
 ];
@@ -211,41 +211,41 @@ const pricingComparisonGroups = [
   {
     title: "Capacidade do plano",
     rows: [
-      { label: "Clinicas", values: ["1 clinica", "Ate 2 clinicas", "Sob demanda"] },
-      { label: "Usuarios", values: ["Ate 2", "Ate 3", "Sob demanda"] },
-      { label: "Pacientes", values: ["Ate 8.000", "Ate 15.000", "Por clinica"] },
-      { label: "Oswald AI", values: ["10 creditos", "50 creditos", "Mais creditos"] },
+      { label: "Clínicas", values: ["1 clínica", "Até 2 clínicas", "Sob demanda"] },
+      { label: "Usuários", values: ["Até 2", "Até 3", "Sob demanda"] },
+      { label: "Pacientes", values: ["Até 8.000", "Até 15.000", "Por clínica"] },
+      { label: "Oswald AI", values: ["10 créditos", "50 créditos", "Mais créditos"] },
       { label: "Secretaria IA", values: [false, "Inclusa", "Personalizada"] },
-      { label: "Suporte completo", values: [true, true, "Prioritario"] },
-      { label: "Importacao de dados antigos", values: [false, true, true] },
+      { label: "Suporte completo", values: [true, true, "Prioritário"] },
+      { label: "Importação de dados antigos", values: [false, true, true] },
     ],
   },
   {
-    title: "Modulos da plataforma",
+    title: "Módulos da plataforma",
     rows: platformModules.map((module) => ({ label: module.title, description: module.text, values: [true, true, true] })),
   },
 
 ];
 const faqs = [
   {
-    question: "A Prontofy serve para medico individual e para clinicas?",
-    answer: "Sim. O plano Single atende medicos individuais, enquanto Pro Max e Enterprise foram pensados para clinicas, equipes e operacoes com mais volume.",
+    question: "A Prontofy serve para médico individual e para clínicas?",
+    answer: "Sim. O plano Single atende médicos individuais, enquanto Pro Max e Enterprise foram pensados para clínicas, equipes e operações com mais volume.",
   },
   {
-    question: "A Secretaria IA esta inclusa?",
-    answer: "No Pro Max ela ja aparece inclusa com configuracao gratis. Para operacoes maiores, a configuracao pode ser ajustada conforme o fluxo da clinica.",
+    question: "A Secretária IA está inclusa?",
+    answer: "No Pro Max ela já aparece inclusa com configuração grátis. Para operações maiores, a configuração pode ser ajustada conforme o fluxo da clínica.",
   },
   {
     question: "Consigo importar dados antigos?",
-    answer: "Sim. A importacao de dados antigos esta prevista nos planos Pro Max e Enterprise para facilitar a transicao sem perder historico.",
+    answer: "Sim. A importação de dados antigos está prevista nos planos Pro Max e Enterprise para facilitar a transição sem perder histórico.",
   },
   {
     question: "O que o Oswald AI faz na rotina?",
-    answer: "Ele apoia transcricao, resumo de historico, diagnostico, prescricoes, pedidos de exames, planos alimentares e analises clinicas com IA.",
+    answer: "Ele apoia transcrição, resumo de histórico, diagnóstico, prescrições, pedidos de exames, planos alimentares e análises clínicas com IA.",
   },
   {
     question: "Preciso contratar suporte separado?",
-    answer: "Nao. O suporte completo esta incluso na assinatura, com atendimento prioritario para operacoes Enterprise.",
+    answer: "Não. O suporte completo está incluso na assinatura, com atendimento prioritário para operações Enterprise.",
   },
 ];
 
@@ -762,7 +762,7 @@ const BenefitsSection = () => (
         <div className="order-2 lg:order-1">
           <div className="relative mx-auto max-w-[680px] pb-2 pt-2 lg:max-w-none lg:py-12">
             <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.055] p-3 shadow-[0_30px_90px_rgba(0,0,0,0.38)] backdrop-blur">
-              <img src={medicaRotinaImage} alt="Medica organizando a rotina clinica com tecnologia" className="aspect-[4/3] w-full rounded-xl object-cover sm:aspect-[16/11] lg:aspect-[4/3]" />
+              <img src={medicaRotinaImage} alt="Médica organizando a rotina clínica com tecnologia" className="aspect-[4/3] w-full rounded-xl object-cover sm:aspect-[16/11] lg:aspect-[4/3]" />
             </div>
 
             <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:hidden">
@@ -809,19 +809,19 @@ const BenefitsSection = () => (
         </div>
 
         <div className="order-1 lg:order-2">
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300">Beneficios reais</p>
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300">Benefícios reais</p>
           <h2 className="mt-4 text-[clamp(32px,3.8vw,46px)] font-extrabold leading-tight">
             Tecnologia que aparece na rotina, no caixa e no atendimento.
           </h2>
           <p className="mt-5 text-base leading-7 text-white/68 sm:text-lg sm:leading-8">
-            A operacao fica mais previsivel quando agenda, atendimento, equipe e indicadores trabalham no mesmo fluxo.
+            A operação fica mais previsível quando agenda, atendimento, equipe e indicadores trabalham no mesmo fluxo.
           </p>
           <button
             type="button"
             onClick={() => scrollToElement("form-contato")}
             className="mt-8 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#1CC88A] px-5 py-3.5 text-sm font-extrabold text-[#04110b] shadow-[0_18px_44px_rgba(28,200,138,0.28)] transition hover:bg-[#35df91] sm:w-auto"
           >
-            Ver como aplicar na minha clinica
+            Ver como aplicar na minha clínica
             <ArrowRight className="h-5 w-5" />
           </button>
         </div>
@@ -840,7 +840,7 @@ const DevicesSection = () => (
           Um ecossistema visual para administrar sua clínica em tempo real.
         </h2>
         <p className="mt-6 max-w-xl text-lg leading-8 text-white/70">
-          Dashboards, agenda e finanças com visão integrada para decidir mais rapido, sem perder o controle do atendimento.
+          Dashboards, agenda e finanças com visão integrada para decidir mais rápido, sem perder o controle do atendimento.
         </p>
       </div>
 
@@ -882,17 +882,17 @@ const DifferentialsSection = () => (
             Diferencial Prontofy
           </span>
           <h2 className="mt-4 text-[clamp(34px,4vw,54px)] font-extrabold leading-tight">
-            Tudo que a clinica precisa em uma operacao conectada.
+            Tudo que a clínica precisa em uma operação conectada.
           </h2>
           <p className="mt-6 text-lg leading-8 text-white/70">
-            Pacientes, agenda, financeiro, CRM, relatorios, administracao e recursos de IA trabalhando no mesmo ambiente para reduzir retrabalho e acelerar decisoes.
+            Pacientes, agenda, financeiro, CRM, relatórios, administração e recursos de IA trabalhando no mesmo ambiente para reduzir retrabalho e acelerar decisões.
           </p>
           <button
             type="button"
             onClick={() => scrollToElement("form-contato")}
             className="mt-8 inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#1CC88A] px-6 py-3.5 text-sm font-extrabold text-[#04110b] shadow-[0_18px_44px_rgba(28,200,138,0.28)] transition hover:bg-[#35df91] sm:w-auto"
           >
-            Quero ver na minha clinica
+            Quero ver na minha clínica
             <ArrowRight className="h-5 w-5" />
           </button>
         </div>
@@ -928,10 +928,10 @@ const PricingSection = () => (
           Comparativo de planos
         </span>
         <h2 className="mt-5 text-[clamp(34px,4vw,54px)] font-extrabold leading-tight text-white">
-          Compare recursos, limites e inteligencia em cada plano.
+          Compare recursos, limites e inteligência em cada plano.
         </h2>
         <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/68 sm:text-lg">
-          Uma visao direta para entender o que cada plano entrega em gestao, atendimento, agenda, financeiro e IA.
+          Uma visão direta para entender o que cada plano entrega em gestão, atendimento, agenda, financeiro e IA.
         </p>
       </div>
 
@@ -986,7 +986,7 @@ const PricingSection = () => (
                         {value === true ? (
                           <CheckCircle2 className="h-5 w-5 text-emerald-300" />
                         ) : value === false ? (
-                          <span className="h-1.5 w-6 rounded-full bg-white/18" aria-label="Nao incluso" />
+                          <span className="h-1.5 w-6 rounded-full bg-white/18" aria-label="Não incluso" />
                         ) : (
                           <span className="text-xs font-extrabold leading-5 text-white/78">{value}</span>
                         )}
@@ -1010,7 +1010,7 @@ const FAQSection = () => (
       <div>
         <p className="text-sm font-bold uppercase tracking-[0.2em] text-emerald-300">FAQ</p>
         <h2 className="mt-4 text-[clamp(32px,3.8vw,46px)] font-extrabold leading-tight">Perguntas frequentes antes de escolher a Prontofy.</h2>
-        <p className="mt-5 text-lg leading-8 text-white/68">Tire as principais duvidas sobre planos, IA, suporte e implantacao antes de conversar com um especialista.</p>
+        <p className="mt-5 text-lg leading-8 text-white/68">Tire as principais dúvidas sobre planos, IA, suporte e implantação antes de conversar com um especialista.</p>
       </div>
       <div className="grid gap-4">
         {faqs.map((faq) => (
@@ -1030,7 +1030,7 @@ const HowItWorksSection = () => (
   <section className="relative min-h-[860px] overflow-hidden bg-[#050709] text-white sm:min-h-[900px] lg:min-h-[820px]">
     <img
       src={implementacaoImage}
-      alt="Implementacao acompanhada da Prontofy na rotina clinica"
+      alt="Implementação acompanhada da Prontofy na rotina clínica"
       className="absolute inset-0 h-full w-full object-cover object-[42%_50%] lg:object-center"
     />
     <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,7,9,0.9)_0%,rgba(5,7,9,0.58)_46%,rgba(5,7,9,0.18)_100%)]" />

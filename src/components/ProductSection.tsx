@@ -1,7 +1,7 @@
 import { Bot, ClipboardPenLine, LayoutDashboard, Stethoscope } from "lucide-react";
 import prontuarioEletro from "@/assets/prontuario-eletro.png";
 
-const WHATSAPP_LINK = "https://wa.me/message/YO6R73FVJZHTC1";
+const PRESENTATION_FORM_LINK = "/apresentacao/formulario";
 
 const productFeatures = [
   {
@@ -61,7 +61,7 @@ const ProductSection = () => {
                 <h3 className="mt-4 text-base font-extrabold leading-tight text-white drop-shadow-[0_8px_22px_rgba(0,0,0,0.8)] sm:text-lg">
                   {feature.title}
                 </h3>
-                <p className="mt-2 max-w-[220px] text-sm leading-6 text-white/70 drop-shadow-[0_8px_22px_rgba(0,0,0,0.72)]">
+                <p className="mt-2 hidden max-w-[220px] text-sm leading-6 text-white/70 drop-shadow-[0_8px_22px_rgba(0,0,0,0.72)] sm:block">
                   {feature.text}
                 </p>
               </div>
@@ -70,7 +70,7 @@ const ProductSection = () => {
         </div>
 
         <div className="mt-12 flex justify-center sm:justify-start">
-          <a href={WHATSAPP_LINK} target="_blank" rel="noreferrer" className="btn-primary w-[88%] sm:w-auto">
+          <a href={PRESENTATION_FORM_LINK} className="btn-primary w-[88%] sm:w-auto">
             Quero evoluir meus atendimentos
           </a>
         </div>

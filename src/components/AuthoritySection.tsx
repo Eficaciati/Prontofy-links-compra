@@ -8,6 +8,8 @@ import balnearioCamboriuImage from "@/assets/balneario-camboriu.png";
 import rioDeJaneiroImage from "@/assets/rio-de-janiero.png";
 import saoPauloImage from "@/assets/sao-paulo.png";
 
+const PRESENTATION_FORM_LINK = "/apresentacao/formulario";
+
 const metrics = [
   { photo: saoPauloImage, number: "+18 mil", desc: "Consultas / ano em São Paulo", count: { end: 18, prefix: "+", suffix: " mil" } },
   { photo: bahiaImage, number: "+6,5 mil", desc: "Atendimentos na Bahia", count: { end: 6.5, prefix: "+", suffix: " mil", decimals: 1 } },
@@ -53,7 +55,7 @@ const AuthoritySection = () => {
           </div>
         </div>
         <div className="mt-12 flex w-full justify-center">
-          <a href="https://wa.me/message/YO6R73FVJZHTC1" target="_blank" rel="noreferrer" className="btn-primary mx-auto w-[88%] sm:w-auto">
+          <a href={PRESENTATION_FORM_LINK} className="btn-primary mx-auto w-[88%] sm:w-auto">
             Quero evoluir meus atendimentos
           </a>
         </div>

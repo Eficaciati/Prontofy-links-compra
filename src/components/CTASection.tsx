@@ -1,6 +1,8 @@
 import { Bot, CalendarCheck, Headphones, MessageCircle, ShieldCheck, Stethoscope } from "lucide-react";
 import simplificarImage from "@/assets/simplificar.png";
 
+const PRESENTATION_FORM_LINK = "/apresentacao/formulario";
+
 const trustBadges = [
   { icon: CalendarCheck, title: "Agenda organizada", label: "Agenda organizada" },
   { icon: Stethoscope, title: "Prontuário mais simples", label: "Prontuário simples" },
@@ -32,12 +34,12 @@ const CTASection = () => {
         </p>
 
         <div className="mt-10 flex justify-center">
-          <a href="/formulario" aria-label="Agendar demonstração" className="btn-primary w-[88vw] sm:w-auto sm:px-12">
+          <a href={PRESENTATION_FORM_LINK} aria-label="Agendar demonstração" className="btn-primary w-[88vw] sm:w-auto sm:px-12">
             Agendar minha apresentação
           </a>
         </div>
 
-        <div className="mt-16 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 sm:grid sm:snap-none sm:grid-cols-3 sm:gap-9 sm:overflow-visible sm:pb-0 lg:grid-cols-6">
+        <div className="mt-16 grid grid-cols-3 gap-x-2 gap-y-7 pb-0 sm:grid-cols-3 sm:gap-9 lg:grid-cols-6">
           {trustBadges.map((badge) => {
             const Icon = badge.icon;
 
@@ -46,13 +48,13 @@ const CTASection = () => {
                 key={badge.title}
                 title={badge.title}
                 aria-label={badge.title}
-                className="flex min-h-[128px] flex-[0_0_140px] snap-center flex-col items-center justify-center text-white/94 transition duration-300 hover:-translate-y-1 sm:flex-auto"
+                className="flex min-h-[92px] flex-col items-center justify-center text-white/94 transition duration-300 hover:-translate-y-1 sm:min-h-[128px]"
                 role="img"
               >
                 <span className="grid h-12 w-12 place-items-center text-white drop-shadow-[0_8px_22px_rgba(0,0,0,0.78)]">
-                  <Icon className="h-8 w-8" strokeWidth={1.7} />
+                  <Icon className="h-7 w-7 sm:h-8 sm:w-8" strokeWidth={1.7} />
                 </span>
-                <span className="mt-4 text-sm font-bold leading-tight text-white drop-shadow-[0_8px_22px_rgba(0,0,0,0.78)]">{badge.label}</span>
+                <span className="mt-3 text-[10px] font-bold leading-tight text-white drop-shadow-[0_8px_22px_rgba(0,0,0,0.78)] sm:mt-4 sm:text-sm">{badge.label}</span>
               </div>
             );
           })}

@@ -8,6 +8,7 @@ import { CookieConsent } from "@/components/CookieConsent";
 
 const Apresentacao = lazy(() => import("./pages/Apresentacao"));
 const ConfiguracaoSecretariaIA = lazy(() => import("./pages/ConfiguracaoSecretariaIA"));
+const FormularioApresentacao = lazy(() => import("./pages/FormularioApresentacao"));
 const FormularioLeads = lazy(() => import("./pages/FormularioLeads"));
 const Index = lazy(() => import("./pages/Index"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -27,6 +28,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/apresentacao" element={<Apresentacao />} />
+            <Route path="/apresentacao/formulario" element={<FormularioApresentacao />} />
             <Route path="/formulario" element={<FormularioLeads />} />
             <Route path="/secretaria-virutal" element={<Navigate to="/secretaria-virtual" replace />} />
             <Route path="/secretaria-virtual" element={<SecretariaVirtual />} />
