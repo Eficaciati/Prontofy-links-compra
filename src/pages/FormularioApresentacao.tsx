@@ -2,10 +2,44 @@ import { FormEvent, useState } from "react";
 import { Check, CheckCircle2, Eye, EyeOff, Lock, Mail, Phone, X } from "lucide-react";
 import ProntofyLogo from "@/components/ProntofyLogo";
 import formularioBg from "@/assets/formulario-apresentacao-bg.png";
-import { createSupabaseAccount } from "@/lib/supabaseAuth";
+import { supabase } from "@/lib/supabase";
+import { z } from "zod";
 
-const PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,}$/;
+const PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).*$/;
 const ACCOUNT_ORIGIN = "apresentacao_prontuario_eletronico";
+
+const FormSchema = z.object({
+  email: z.string().trim().email("Informe um email válido."),
+  password: z.string()
+    .min(8, "A senha precisa ter no mínimo 8 caracteres.")
+    .regex(
+      PASSWORD_PATTERN,
+      "A senha precisa conter letra maiúscula, letra minúscula, número e caractere especial."
+    ),
+  phone: z.string().trim().min(1, "Informe seu telefone ou WhatsApp."),
+});
+
+const getSupabaseErrorMessage = (error: any) => {
+  const message = error?.message || error?.error_description || error?.msg || error?.error;
+
+  if (!message) {
+    return "Não foi possível criar a conta agora. Tente novamente em alguns instantes.";
+  }
+
+  if (/already registered|already exists|user exists/i.test(message)) {
+    return "Este email já está cadastrado. Tente entrar com outra conta.";
+  }
+
+  if (/email rate limit exceeded|rate limit/i.test(message)) {
+    return "Muitas tentativas de envio. Aguarde alguns minutos e tente novamente.";
+  }
+
+  if (/password/i.test(message)) {
+    return "A senha não atende aos requisitos do Supabase. Tente uma senha mais forte.";
+  }
+
+  return message;
+};
 
 const FormularioApresentacao = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -35,25 +69,50 @@ const FormularioApresentacao = () => {
       phone: String(formData.get("phone") ?? "").trim(),
     };
 
-    if (!PASSWORD_PATTERN.test(payload.password)) {
-      setSubmitError("A senha precisa ter 8 caracteres, letra maiúscula, letra minúscula, número e caractere especial.");
+    const validationResult = FormSchema.safeParse(payload);
+    if (!validationResult.success) {
+      const fieldErrors = validationResult.error.flatten().fieldErrors;
+      const firstError = Object.values(fieldErrors).flat()[0];
+      setSubmitError(firstError || "A validação falhou.");
       setIsSubmitting(false);
       return;
     }
 
     try {
-      await createSupabaseAccount({
-        email: payload.email,
-        password: payload.password,
-        phone: payload.phone,
-        origin: ACCOUNT_ORIGIN,
+      const { data, error: signUpError } = await supabase.functions.invoke("register-clinic-admin", {
+        body: {
+          email: payload.email,
+          password: payload.password,
+          phone: payload.phone,
+        },
       });
+
+      if (signUpError) {
+        throw signUpError;
+      }
+
+      if (data?.error) {
+        throw new Error(data.error);
+      }
 
       form.reset();
       setPassword("");
       setSubmitted(true);
-    } catch (error) {
-      setSubmitError(error instanceof Error ? error.message : "Não foi possível criar a conta agora. Tente novamente em alguns instantes.");
+    } catch (error: any) {
+      let errMsg = "Não foi possível criar a conta agora. Tente novamente em alguns instantes.";
+      if (error && typeof error.context?.json === "function") {
+        try {
+          const body = await error.context.json();
+          if (body?.error) {
+            errMsg = body.error;
+          }
+        } catch (_) {
+          if (error.message) errMsg = error.message;
+        }
+      } else if (error?.message) {
+        errMsg = error.message;
+      }
+      setSubmitError(getSupabaseErrorMessage({ message: errMsg }));
     } finally {
       setIsSubmitting(false);
     }
@@ -113,7 +172,7 @@ const FormularioApresentacao = () => {
                         name="password"
                         required
                         minLength={8}
-                        pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,}"
+                        pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).*"
                         title="Use no mínimo 8 caracteres, com letra maiúscula, minúscula, número e caractere especial."
                         placeholder="Senha segura"
                         value={password}

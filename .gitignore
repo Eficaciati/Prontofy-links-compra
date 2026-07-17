@@ -27,3 +27,4 @@ dist-ssr
 *.md
 imagens_insp
 imagens_insp/*.png
+.env

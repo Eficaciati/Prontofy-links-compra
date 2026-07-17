@@ -1,4 +1,5 @@
-﻿import { FormEvent, ReactNode, useMemo, useState, useEffect, useRef, useCallback } from "react";
+import { FormEvent, ReactNode, useMemo, useState, useEffect, useRef, useCallback } from "react";
+import { z } from "zod";
 import {
   Activity,
   ArrowDown,
@@ -277,6 +278,23 @@ const sanitizeText = (value: string, maxLength: number) => value.trim().replace(
 
 const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(email);
 
+const LeadsSchema = z.object({
+  nome: z.string().trim().min(1, "Informe seu nome completo.").max(120, "Nome muito longo."),
+  email: z.string().trim().min(1, "Informe seu email.").email("Informe um email válido.").max(160, "Email muito longo."),
+  numero: z.string().trim().min(1, "Informe seu telefone ou WhatsApp.").max(32, "Número muito longo."),
+  estado: z.string().min(1, "Selecione seu estado.").refine(val => ESTADOS.includes(val), "Selecione seu estado."),
+  maior_dor: z.string().min(1, "Selecione sua maior dor."),
+  outro_txt: z.string().optional(),
+}).superRefine((data, ctx) => {
+  if (data.maior_dor === "Outra" && (!data.outro_txt || !data.outro_txt.trim())) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      message: "Descreva o motivo.",
+      path: ["outro_txt"],
+    });
+  }
+});
+
 const scrollToElement = (id: string) => {
   const element = document.getElementById(id);
   if (!element) return;
@@ -311,21 +329,20 @@ const FormularioLeads = () => {
   );
 
   const validate = () => {
-    const nextErrors: FormErrors = {};
-
-    if (!payload.nome) nextErrors.nome = "Informe seu nome completo.";
-    if (!payload.email) {
-      nextErrors.email = "Informe seu email.";
-    } else if (!isValidEmail(payload.email)) {
-      nextErrors.email = "Informe um email válido.";
+    const result = LeadsSchema.safeParse(formData);
+    if (!result.success) {
+      const nextErrors: FormErrors = {};
+      result.error.issues.forEach((issue) => {
+        const field = issue.path[0] as keyof Omit<FormState, "website">;
+        if (field && !nextErrors[field]) {
+          nextErrors[field] = issue.message;
+        }
+      });
+      setErrors(nextErrors);
+      return false;
     }
-    if (!payload.numero) nextErrors.numero = "Informe seu telefone ou WhatsApp.";
-    if (!payload.estado || !ESTADOS.includes(payload.estado)) nextErrors.estado = "Selecione seu estado.";
-    if (!payload.maior_dor) nextErrors.maior_dor = "Selecione sua maior dor.";
-    if (formData.maior_dor === "Outra" && !outroText) nextErrors.outro_txt = "Descreva o motivo.";
-
-    setErrors(nextErrors);
-    return Object.keys(nextErrors).length === 0;
+    setErrors({});
+    return true;
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
