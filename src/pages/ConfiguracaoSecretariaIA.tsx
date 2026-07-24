@@ -28,7 +28,7 @@ const MINUTES = Array.from({ length: 60 }, (_, minute) => String(minute).padStar
 const DEFAULT_WELCOME_MESSAGE = "Olá, aqui é a secretária virtual da (nome da sua unidade de saúde).";
 const DEFAULT_PATIENT_QUESTIONS = "Nome, idade, motivo da consulta e queixa principal.";
 const WHATSAPP_URL = "https://wa.me/message/YO6R73FVJZHTC1";
-const N8N_WEBHOOK_URL = "https://teste-n8n-editor.6esqeg.easypanel.host/webhook/sec-de-ia";
+const N8N_WEBHOOK_URL = "https://teste-n8n-webhook.6esqeg.easypanel.host/webhook/sec-de-ia";
 const STEP_PROGRESS = [0, 40, 90];
 
 type FlowStep = "inicio" | "formulario" | "sucesso";
@@ -265,7 +265,7 @@ const ConfiguracaoSecretariaIA = () => {
   }
 
   return (
-    <main className="min-h-screen bg-[#06131f] text-white">
+    <main className="min-h-screen overflow-x-hidden bg-[#06131f] text-white">
       <header className="fixed inset-x-0 top-0 z-[80] min-h-20 border-b border-white/10 bg-[#06131f]/92 px-5 py-5 shadow-[0_16px_38px_rgba(0,0,0,0.28)] backdrop-blur-xl sm:min-h-0 sm:px-8 sm:py-3 lg:px-10">
         <div className="mx-auto flex max-w-6xl items-center gap-4">
           <ProntofyLogo
@@ -276,12 +276,12 @@ const ConfiguracaoSecretariaIA = () => {
         </div>
       </header>
 
-      <section className="relative overflow-hidden px-4 pb-10 pt-16 sm:px-8 lg:px-10 sm:pt-20">
+      <section className="relative w-full overflow-x-clip px-4 pb-10 pt-16 sm:px-8 lg:px-10 sm:pt-20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(28,200,138,0.16),transparent_28%),radial-gradient(circle_at_84%_22%,rgba(30,136,229,0.18),transparent_30%),linear-gradient(135deg,#071725_0%,#0b2339_48%,#06131f_100%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.028)_1px,transparent_1px)] bg-[size:72px_72px] opacity-35" />
 
-        <div className="relative mx-auto flex min-h-[calc(100vh-80px)] max-w-7xl flex-col justify-center">
-          <form ref={formStartRef} onSubmit={handleSubmit} className="mx-auto w-full max-w-5xl rounded-[2rem] border border-white/12 bg-[#111820]/88 p-4 shadow-[0_28px_90px_rgba(0,0,0,0.38)] backdrop-blur-xl sm:p-6 lg:p-8 min-w-0">
+        <div className="relative mx-auto flex min-h-[calc(100vh-80px)] w-full max-w-7xl min-w-0 flex-col justify-center">
+          <form ref={formStartRef} onSubmit={handleSubmit} className="mx-auto w-full max-w-5xl min-w-0 overflow-x-clip rounded-[2rem] border border-white/12 bg-[#111820]/88 p-4 shadow-[0_28px_90px_rgba(0,0,0,0.38)] backdrop-blur-xl sm:p-6 lg:p-8">
             <div className="border-b border-white/10 pb-5">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#1CC88A]">Checklist de configuração</p>
               <h2 className="mt-2 text-2xl font-extrabold">Dados da Secretária IA</h2>
@@ -333,7 +333,7 @@ const ConfiguracaoSecretariaIA = () => {
               </div>
             )}
 
-            <div className="mt-7 rounded-[1.5rem] border border-white/10 bg-[#07111a]/72 p-5 sm:p-6 w-full min-w-0">
+            <div className="mt-7 w-full min-w-0 overflow-x-clip rounded-[1.5rem] border border-white/10 bg-[#07111a]/72 p-5 sm:p-6">
               <div className="mb-6 flex items-center gap-3">
                 <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[#1CC88A]/12 text-[#1CC88A]">
                   <StepIcon className="h-5 w-5" />
@@ -630,11 +630,11 @@ type FieldProps = {
 };
 
 const Input = ({ label, value, onChange, type = "text", icon: Icon, readOnly, hasError, placeholder, maxLength, inputMode }: FieldProps) => (
-  <label className="block">
+  <label className="block min-w-0">
     <span className={`mb-2 block text-sm font-bold ${hasError ? "text-red-300" : "text-white/78"}`}>{label}</span>
-    <div className={`flex items-center w-full rounded-2xl border px-4 transition focus-within:border-[#1CC88A]/70 ${hasError ? "border-red-400/80 bg-red-500/10" : "border-white/10 bg-white/[0.055]"
+    <div className={`flex w-full min-w-0 items-center overflow-hidden rounded-2xl border px-4 transition focus-within:border-[#1CC88A]/70 ${hasError ? "border-red-400/80 bg-red-500/10" : "border-white/10 bg-white/[0.055]"
       }`}>
-      {Icon && <Icon className={`mr-3 h-4 w-4 ${hasError ? "text-red-300" : "text-white/38"}`} />}
+      {Icon && <Icon className={`mr-3 h-4 w-4 shrink-0 ${hasError ? "text-red-300" : "text-white/38"}`} />}
       <input
         type={type}
         value={value}
@@ -642,7 +642,7 @@ const Input = ({ label, value, onChange, type = "text", icon: Icon, readOnly, ha
         readOnly={readOnly}
         maxLength={maxLength}
         inputMode={inputMode}
-        className={`min-h-12 flex-1 min-w-0 bg-transparent text-sm font-semibold text-white outline-none ${hasError ? "placeholder:text-red-200/55" : "placeholder:text-white/34"}`}
+        className={`min-h-12 min-w-0 flex-1 bg-transparent text-base font-semibold text-white outline-none sm:text-sm ${hasError ? "placeholder:text-red-200/55" : "placeholder:text-white/34"}`}
         placeholder={placeholder || label}
       />
     </div>
@@ -650,14 +650,14 @@ const Input = ({ label, value, onChange, type = "text", icon: Icon, readOnly, ha
 );
 
 const Textarea = ({ label, value, onChange, readOnly, hasError, placeholder }: Omit<FieldProps, "type" | "icon">) => (
-  <label className="block">
+  <label className="block min-w-0">
     <span className={`mb-2 block text-sm font-bold ${hasError ? "text-red-300" : "text-white/78"}`}>{label}</span>
     <textarea
       value={value}
       onChange={(event) => onChange(event.target.value)}
       readOnly={readOnly}
       rows={3}
-      className={`w-full resize-none rounded-2xl border px-4 py-3 text-sm font-semibold text-white outline-none transition focus:border-[#1CC88A]/70 ${hasError ? "border-red-400/80 bg-red-500/10 placeholder:text-red-200/55" : "border-white/10 bg-white/[0.055] placeholder:text-white/34"
+      className={`w-full min-w-0 resize-none rounded-2xl border px-4 py-3 text-base font-semibold text-white outline-none transition focus:border-[#1CC88A]/70 sm:text-sm ${hasError ? "border-red-400/80 bg-red-500/10 placeholder:text-red-200/55" : "border-white/10 bg-white/[0.055] placeholder:text-white/34"
         }`}
       placeholder={placeholder || label}
     />
@@ -722,7 +722,7 @@ const TimePicker = ({ label, value, onChange }: { label: string; value: string; 
           onBlur={handleBlur}
           onFocus={() => setIsOpen(true)}
           placeholder="00:00"
-          className="min-h-12 flex-1 bg-transparent text-sm font-extrabold text-white outline-none placeholder:text-white/20"
+          className="min-h-12 min-w-0 flex-1 bg-transparent text-base font-extrabold text-white outline-none placeholder:text-white/20 sm:text-sm"
           aria-label={`${label}: horario selecionado`}
         />
         <button
@@ -965,7 +965,7 @@ const DefaultOrCustomText = ({
   const isDefault = value === defaultValue;
 
   return (
-    <div>
+    <div className="min-w-0">
       <p className="mb-2 text-sm font-bold text-white/78">{label}</p>
       <div className="mb-3 flex flex-wrap gap-2">
         <button
@@ -995,7 +995,7 @@ const DefaultOrCustomText = ({
           value={value}
           onChange={(event) => onChange(event.target.value)}
           rows={3}
-          className="w-full resize-none rounded-2xl border border-white/10 bg-white/[0.055] px-4 py-3 text-sm font-semibold text-white outline-none transition focus:border-[#1CC88A]/70 placeholder:text-white/34"
+          className="w-full min-w-0 resize-none rounded-2xl border border-white/10 bg-white/[0.055] px-4 py-3 text-base font-semibold text-white outline-none transition focus:border-[#1CC88A]/70 placeholder:text-white/34 sm:text-sm"
           placeholder={label}
         />
       )}
@@ -1016,7 +1016,7 @@ const ChoiceGroup = ({
   value: string;
   onChange: (value: string) => void;
 }) => (
-  <div>
+  <div className="min-w-0">
     <p className="mb-2 text-sm font-bold text-white/78">{label}</p>
     {description && <p className="-mt-1 mb-3 text-sm font-medium leading-6 text-white/56">{description}</p>}
     <div className="flex flex-wrap gap-2">
@@ -1025,7 +1025,7 @@ const ChoiceGroup = ({
           key={option}
           type="button"
           onClick={() => onChange(option)}
-          className={`rounded-full border px-4 py-2 text-sm font-extrabold transition ${value === option ? "border-[#1CC88A] bg-[#1CC88A] text-[#06131f]" : "border-white/10 bg-white/[0.055] text-white/62 hover:text-white"
+          className={`min-w-0 max-w-full rounded-full border px-4 py-2 text-sm font-extrabold transition ${value === option ? "border-[#1CC88A] bg-[#1CC88A] text-[#06131f]" : "border-white/10 bg-white/[0.055] text-white/62 hover:text-white"
             }`}
         >
           {option}
@@ -1036,7 +1036,7 @@ const ChoiceGroup = ({
 );
 
 const MultiChips = ({ label, options, selected, onToggle }: { label: string; options: string[]; selected: string[]; onToggle: (value: string) => void }) => (
-  <div>
+  <div className="min-w-0">
     <p className="mb-2 text-sm font-bold text-white/78">{label}</p>
     <div className="flex flex-wrap gap-2">
       {options.map((option) => (
@@ -1044,7 +1044,7 @@ const MultiChips = ({ label, options, selected, onToggle }: { label: string; opt
           key={option}
           type="button"
           onClick={() => onToggle(option)}
-          className={`rounded-full border px-4 py-2 text-sm font-extrabold transition ${selected.includes(option) ? "border-[#1CC88A] bg-[#1CC88A] text-[#06131f]" : "border-white/10 bg-white/[0.055] text-white/62 hover:text-white"
+          className={`min-w-0 max-w-full rounded-full border px-4 py-2 text-sm font-extrabold transition ${selected.includes(option) ? "border-[#1CC88A] bg-[#1CC88A] text-[#06131f]" : "border-white/10 bg-white/[0.055] text-white/62 hover:text-white"
             }`}
         >
           {option}
@@ -1055,13 +1055,13 @@ const MultiChips = ({ label, options, selected, onToggle }: { label: string; opt
 );
 
 const SelectPill = ({ label, value, options, onChange }: { label: string; value: string; options: string[]; onChange: (value: string) => void }) => (
-  <label className="block">
+  <label className="block min-w-0">
     <span className="mb-2 block text-sm font-bold text-white/78">{label}</span>
-    <div className="relative">
+    <div className="relative min-w-0">
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="min-h-14 w-full appearance-none rounded-2xl border border-white/10 bg-[#111820] pl-4 pr-10 text-sm font-extrabold text-white outline-none transition focus:border-[#1CC88A]/70"
+        className="min-h-14 w-full min-w-0 appearance-none rounded-2xl border border-white/10 bg-[#111820] pl-4 pr-10 text-base font-extrabold text-white outline-none transition focus:border-[#1CC88A]/70 sm:text-sm"
       >
         {options.map((option) => (
           <option key={option} value={option}>
