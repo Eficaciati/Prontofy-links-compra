@@ -22,23 +22,21 @@ const queryClient = new QueryClient();
 
 const AppRoutes = () => {
   const location = useLocation();
-  const [promo, setPromo] = useState<Promotion | null>(() => getActivePromotion());
+  const [promo, setPromo] = useState<Promotion | null>(() => getActivePromotion(location.pathname));
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const promoId = searchParams.get("promo");
 
     if (promoId) {
-      processPromoUrlParam(promoId).then((fetchedPromo) => {
-        if (fetchedPromo) {
-          setPromo(fetchedPromo);
-        }
+      processPromoUrlParam(promoId, location.pathname).then((fetchedPromo) => {
+        setPromo(fetchedPromo);
       });
     } else {
-      const active = getActivePromotion();
+      const active = getActivePromotion(location.pathname);
       setPromo(active);
     }
-  }, [location.search]);
+  }, [location.pathname, location.search]);
 
   return (
     <>

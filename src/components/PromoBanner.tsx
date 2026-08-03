@@ -21,7 +21,7 @@ export function PromoBanner({ promo, onDismiss }: PromoBannerProps) {
       setTimeLeft(remaining);
 
       if (remaining.isExpired) {
-        clearActivePromotion();
+        clearActivePromotion(promo.id);
         if (onDismiss) onDismiss();
       }
     };
